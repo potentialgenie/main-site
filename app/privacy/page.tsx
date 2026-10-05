@@ -11,7 +11,7 @@ export default function PrivacyPage() {
       sections={[
         {
           heading: "Messages",
-          body: "The form opens a draft in your mail app. We receive it only if you send it. We use it to reply about a development order.",
+          body: "The form opens a draft in your mail app. We receive it only if you send it. We use it to reply about your order.",
         },
         {
           heading: "What we do not collect here",
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
         },
         {
           heading: "Questions",
-          body: "Privacy questions can go to hello@potentialgenie.com.",
+          body: "Send privacy questions to hello@potentialgenie.com.",
         },
       ]}
     />

@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-canvas: #ffffff;
   --color-surface: #ffffff;
   --color-sunken: #f6f7f8;
+  --color-card: #ffffff;
+  --color-footer: #0f1419;
   --color-ink: #0f1419;
   --color-ink-strong: #0a0a0a;
   --color-ink-muted: #5c6570;
@@ -21,8 +25,32 @@
   --shadow-subtle: 0 1px 2px rgb(20 22 26 / 0.06);
 }
 
+html.dark {
+  --color-canvas: #0e1116;
+  --color-surface: #141922;
+  --color-sunken: #090c11;
+  --color-card: #1b222d;
+  --color-footer: #07090c;
+  --color-ink: #f3f5f7;
+  --color-ink-strong: #ffffff;
+  --color-ink-muted: #a8b1bb;
+  --color-ink-faint: #7e8894;
+  --color-line: #2a313c;
+  --color-line-strong: #3c4654;
+  --color-accent: #9aa4ff;
+  --color-accent-strong: #c3c8ff;
+  --color-accent-soft: #9aa2f0;
+  --color-accent-wash: #1c2344;
+  --color-accent-line: #343d78;
+  --shadow-raised: 0 18px 50px -28px rgb(0 0 0 / 0.65);
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.35);
+  color-scheme: dark;
+}
+
 html {
   scroll-behavior: auto;
+  color-scheme: light;
+  background: var(--color-canvas);
 }
 
 body {
@@ -30,6 +58,9 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
 ::selection {
@@ -123,6 +154,86 @@ body {
   box-shadow: 0 16px 40px -24px rgb(20 22 26 / 0.4);
 }
 
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  left: 0.75rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.hero-photo {
+  animation: hero-drift 16s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.panel-in {
+  animation: panel-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.menu-in {
+  animation: menu-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+details[open] > p {
+  animation: fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .lede {
   font-size: 1.2rem;
   line-height: 1.55;
@@ -176,6 +287,17 @@ body {
 .btn-primary:hover {
   background: var(--color-accent-strong);
   border-color: var(--color-accent-strong);
+}
+
+html.dark .btn-primary {
+  background: #3b46c4;
+  border-color: #3b46c4;
+  color: white;
+}
+
+html.dark .btn-primary:hover {
+  background: #2c369e;
+  border-color: #2c369e;
 }
 
 .btn-secondary {
@@ -242,5 +364,12 @@ select:focus-visible {
 
   .lift:hover {
     transform: none;
+  }
+
+  .hero-photo,
+  .panel-in,
+  .menu-in,
+  details[open] > p {
+    animation: none;
   }
 }

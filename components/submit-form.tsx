@@ -36,7 +36,7 @@ export function SubmitForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-line bg-surface p-7 sm:p-8">
+    <form onSubmit={onSubmit} className="rounded-xl border border-line bg-card p-7 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name" name="name" autoComplete="name" />
         <Field label="Email" name="email" type="email" autoComplete="email" />
@@ -50,20 +50,20 @@ export function SubmitForm() {
         }}
       />
       <label className="mt-5 block text-[0.85rem] font-medium text-ink">
-        The detail
+        Details
         <textarea
           name="detail"
           required
           rows={6}
-          placeholder="The product, who uses it, the industry, and whether it is web, mobile, or both."
+          placeholder="What the product is, who uses it, the industry, and whether it is web, mobile, or both."
           className="mt-2 w-full resize-y rounded-3xl border border-line-strong bg-canvas px-4 py-3 text-[0.95rem] font-normal leading-relaxed"
         />
       </label>
       <button type="submit" className="btn btn-primary mt-6">
-        Prepare email
+        Open email draft
       </button>
       <p className="mt-4 text-[0.825rem] leading-relaxed text-ink-muted">
-        Prefer to write directly? {site.email}
+        Or email us directly at {site.email}
       </p>
     </form>
   );
@@ -71,10 +71,10 @@ export function SubmitForm() {
 
 function DraftReady({ draft }: { draft: string }) {
   return (
-    <div className="rounded-xl border border-line bg-surface p-7 sm:p-8">
+    <div className="rounded-xl border border-line bg-card p-7 sm:p-8">
       <h3 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h3>
       <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
-        If your mail app did not open, use the link below. Nothing is stored on this site until that message is sent.
+        If your mail app did not open, use the link below. Nothing is stored on this site until you send the message.
       </p>
       <a href={draft} className="btn btn-primary mt-6">
         Open the draft again
@@ -140,7 +140,7 @@ function RequestMenu({
             id={listId}
             role="listbox"
             aria-labelledby={labelId}
-            className="absolute bottom-full left-0 z-20 mb-2 max-h-80 w-full overflow-auto rounded-3xl border border-line bg-white p-2 shadow-raised"
+            className="absolute bottom-full left-0 z-20 mb-2 max-h-80 w-full overflow-auto rounded-3xl border border-line bg-card p-2 shadow-raised"
           >
             {requestTypes.map((group) => (
               <div key={group.label} className="py-1">

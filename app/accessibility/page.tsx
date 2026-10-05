@@ -7,7 +7,7 @@ export default function AccessibilityPage() {
   return (
     <LegalPage
       title="Using this site"
-      lede="Pages use semantic headings, visible focus, and text that does not depend on a background image. If something blocks you, tell us and we will fix that path."
+      lede="Pages use semantic headings, visible focus, and text that does not depend on a background image. If something blocks you, tell us and we will fix it."
       sections={[
         {
           heading: "What to expect",
@@ -15,7 +15,7 @@ export default function AccessibilityPage() {
         },
         {
           heading: "Report a barrier",
-          body: "Email hello@potentialgenie.com with the page address and what you were trying to do. We treat that as a defect, not as feedback to file away.",
+          body: "Email hello@potentialgenie.com with the page address and what you were trying to do. We treat that as something to fix.",
         },
       ]}
     />

@@ -4,16 +4,16 @@ import { footerColumns, site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="bg-footer text-white">
       <div className="container-page py-14 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,2fr)]">
           <div className="max-w-sm">
             <Logo tone="white" />
             <p className="mt-4 text-[0.925rem] leading-relaxed text-white/70">
-              Web and mobile developers who take client orders across industries.
+              A web and mobile team for client orders across industries.
             </p>
             <div className="mt-6">
-              <a href="/#contact" className="btn btn-primary border-white bg-white text-ink hover:bg-white/90">
+              <a href="/#contact" className="btn btn-primary border-white bg-white text-[#14161a] hover:bg-white/90">
                 Contact us
                 <Arrow />
               </a>

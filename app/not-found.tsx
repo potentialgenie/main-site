@@ -10,7 +10,7 @@ export default function NotFound() {
         </RevealTitle>
         <p className="lede mt-5">The address may be mistyped, or the page may have moved.</p>
         <Link href="/" className="btn btn-primary mt-8">
-          Back to the start
+          Back to home
         </Link>
       </div>
     </section>
