@@ -77,7 +77,7 @@ export function TechnologyBoard() {
       const left = Math.max(0, Math.min(scroller.scrollWidth - scroller.clientWidth, scroller.scrollLeft + delta));
       scroller.scrollTo({ left, behavior: motion() });
     }
-    document.getElementById(active)?.scrollIntoView({ block: "nearest" });
+    document.getElementById(active)?.scrollIntoView({ block: "nearest", behavior: motion() });
   }, [active]);
 
   return (

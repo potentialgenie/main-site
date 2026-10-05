@@ -345,6 +345,114 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
+.arrow-nudge {
+  transition: transform 180ms ease;
+}
+
+.group:hover .arrow-nudge {
+  transform: translateX(4px);
+}
+
+.chip-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rise[data-shown="true"] .chip-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.help-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.help-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -30%;
+  width: 28%;
+  background: linear-gradient(90deg, transparent, rgb(59 70 196 / 0.14), transparent);
+  transform: translateX(-140%);
+  pointer-events: none;
+}
+
+.rise[data-shown="true"] .help-sheen::before {
+  animation: help-sheen 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes help-sheen {
+  to {
+    transform: translateX(460%);
+  }
+}
+
+.order-track {
+  position: relative;
+}
+
+.order-line {
+  position: absolute;
+  top: 2.55rem;
+  right: 6%;
+  left: 6%;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-line-strong);
+  pointer-events: none;
+}
+
+.order-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.order-track[data-shown="true"] .order-line::after {
+  transform: scaleX(1);
+}
+
+.step-index {
+  opacity: 0;
+  transform: scale(0.72);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.order-track[data-shown="true"] .step-index {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 1023px) {
+  .order-line {
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 0;
+    width: 2px;
+    height: auto;
+  }
+
+  .order-line::after {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .order-track[data-shown="true"] .order-line::after {
+    transform: scaleY(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -369,7 +477,16 @@ select:focus-visible {
   .hero-photo,
   .panel-in,
   .menu-in,
-  details[open] > p {
+  details[open] > p,
+  .help-sheen::before {
     animation: none;
+  }
+
+  .chip-in,
+  .step-index,
+  .order-line::after {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

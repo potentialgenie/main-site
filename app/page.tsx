@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { HashLink } from "@/components/hash-link";
+import { OrderTrack } from "@/components/order-track";
 import { RevealTitle } from "@/components/reveal-title";
 import { Rise } from "@/components/rise";
 import { SubmitForm } from "@/components/submit-form";
 import { TechnologyBoard } from "@/components/technology-board";
 import { clientStages, faqs, industries } from "@/lib/site";
 
-const helpAreas = [
-  { title: "Web & Mobile Development", body: "Sites and apps: front end, back end, full stack, a CMS, and native or cross-platform mobile." },
-  { title: "A store", body: "WooCommerce, Magento, Medusa, or a custom catalog and checkout." },
-  { title: "Design and AI", body: "UX, UI, a prototype, and AI features inside the product." },
-];
+const webChips = ["React", "Next.js", "Swift", "Kotlin", "Flutter"];
+const storeChips = ["WooCommerce", "Magento", "Medusa"];
 
 export default function HomePage() {
   return (
@@ -61,19 +60,83 @@ export default function HomePage() {
             What we help with
           </RevealTitle>
           <Rise>
-            <p className="lede mt-5 max-w-[62ch]">
-              Describe the product and the industry. We assign developers to that order. Work starts when the scope is agreed.
+            <p className="lede mt-5 max-w-[46rem]">
+              An order is a site and app, a store, or the design and AI around them. Open a card to see the tools. The steps below are how that order starts.
             </p>
           </Rise>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {helpAreas.map((area, index) => (
-              <Rise key={area.title} delay={index * 70} className="h-full">
-                <article className="lift h-full rounded-3xl border border-ink/10 bg-card p-6">
-                  <h3 className="font-semibold tracking-[-0.012em]">{area.title}</h3>
-                  <p className="mt-2.5 text-[0.925rem] leading-relaxed text-ink-muted">{area.body}</p>
+          <div className="mt-10 grid gap-4 lg:grid-cols-5">
+            <Rise className="h-full lg:col-span-3">
+              <HashLink
+                href="#web-mobile-development"
+                className="help-sheen lift group flex h-full flex-col rounded-[2rem] border border-ink/10 bg-card p-7 sm:p-9"
+              >
+                <p className="font-mono text-sm font-semibold tracking-[0.14em] text-accent">01</p>
+                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em]">Web & Mobile Development</h3>
+                <p className="mt-3 max-w-[40ch] text-[0.98rem] leading-relaxed text-ink-muted">
+                  Sites and apps belong in one order. Front end, back end, full stack, a CMS you can edit, and iOS, Android, or one shared mobile codebase.
+                </p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {webChips.map((chip, index) => (
+                    <li
+                      key={chip}
+                      className="chip-in rounded-md border border-line bg-canvas px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.08em] text-ink uppercase"
+                      style={{ transitionDelay: `${180 + index * 70}ms` }}
+                    >
+                      {chip}
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-medium text-accent">
+                  See the specialties
+                  <Arrow />
+                </span>
+              </HashLink>
+            </Rise>
+            <div className="grid gap-4 lg:col-span-2">
+              <Rise delay={80} className="h-full">
+                <HashLink href="#ecommerce-development" className="lift group flex h-full flex-col rounded-[2rem] border border-ink/10 bg-card p-6">
+                  <p className="font-mono text-sm font-semibold tracking-[0.14em] text-accent">02</p>
+                  <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em]">A store</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                    Catalog, checkout, and customer accounts. Not a brochure site.
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {storeChips.map((chip, index) => (
+                      <li
+                        key={chip}
+                        className="chip-in rounded-md border border-line bg-canvas px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.08em] text-ink uppercase"
+                        style={{ transitionDelay: `${220 + index * 70}ms` }}
+                      >
+                        {chip}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent">
+                    See ecommerce
+                    <Arrow />
+                  </span>
+                </HashLink>
+              </Rise>
+              <Rise delay={150} className="h-full">
+                <article className="lift flex h-full flex-col rounded-[2rem] border border-ink/10 bg-card p-6">
+                  <p className="font-mono text-sm font-semibold tracking-[0.14em] text-accent">03</p>
+                  <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Design and AI</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                    The product needs a shape before the code, and sometimes a model inside it. Each path opens its own specialties.
+                  </p>
+                  <div className="mt-5 flex flex-col gap-2">
+                    <HashLink href="#ui-ux-design" className="group inline-flex items-center justify-between rounded-2xl border border-line bg-canvas px-4 py-3 text-sm font-medium">
+                      UI UX Design
+                      <Arrow />
+                    </HashLink>
+                    <HashLink href="#ai-apps" className="group inline-flex items-center justify-between rounded-2xl border border-line bg-canvas px-4 py-3 text-sm font-medium">
+                      AI Apps & Integration
+                      <Arrow />
+                    </HashLink>
+                  </div>
                 </article>
               </Rise>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -85,20 +148,37 @@ export default function HomePage() {
               How a client order works
             </RevealTitle>
             <Rise>
-              <p className="lede mx-auto mt-4 max-w-[42ch]">From the first note to a product you can run.</p>
+              <p className="lede mx-auto mt-4 max-w-[36rem]">Four steps from the note above to a product you can run.</p>
             </Rise>
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {clientStages.map((stage, index) => (
-              <Rise key={stage.step} delay={index * 70} className="h-full">
-                <article className="lift h-full rounded-3xl border border-ink/10 bg-card p-6">
-                  <p className="font-mono text-sm font-semibold tracking-[0.14em] text-accent">{stage.step}</p>
-                  <h3 className="mt-4 text-lg font-medium tracking-[-0.03em]">{stage.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{stage.body}</p>
-                </article>
-              </Rise>
-            ))}
-          </div>
+          <OrderTrack>
+            <div className="relative z-10 grid gap-4 pl-4 sm:grid-cols-2 sm:pl-0 lg:grid-cols-4">
+              {clientStages.map((stage, index) => (
+                <Rise key={stage.step} delay={index * 90} className="h-full">
+                  <article className="lift h-full rounded-3xl border border-ink/10 bg-card p-6">
+                    <p
+                      className="step-index inline-flex bg-card pr-2 font-mono text-sm font-semibold tracking-[0.14em] text-accent"
+                      style={{ transitionDelay: `${index * 140}ms` }}
+                    >
+                      {stage.step}
+                    </p>
+                    <h3 className="mt-4 text-lg font-medium tracking-[-0.03em]">{stage.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{stage.body}</p>
+                  </article>
+                </Rise>
+              ))}
+            </div>
+          </OrderTrack>
+          <Rise delay={200}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <HashLink href="#technologies" className="btn btn-secondary">
+                See the specialties
+              </HashLink>
+              <HashLink href="#contact" className="btn btn-primary">
+                Tell us the order
+              </HashLink>
+            </div>
+          </Rise>
         </div>
       </section>
 
@@ -108,7 +188,7 @@ export default function HomePage() {
             What we build
           </RevealTitle>
           <Rise>
-            <p className="lede mt-5 max-w-[46ch]">Choose a category to see the work inside it, and the tools we use.</p>
+            <p className="lede mt-5 max-w-[42rem]">Open a category to see the work and the tools inside it. The cards above land on this same list.</p>
           </Rise>
           <div className="mt-10">
             <TechnologyBoard />
@@ -209,5 +289,14 @@ export default function HomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+function Arrow() {
+  return (
+    <svg viewBox="0 0 24 24" className="arrow-nudge h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M5 12h14" strokeLinecap="round" />
+      <path d="m12 5 7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

@@ -206,22 +206,22 @@ export const clientStages = [
   {
     step: "01",
     title: "Send the order",
-    body: "Tell us what the product is and who uses it.",
+    body: "Tell us the product, who uses it, and the industry. A finished specification is not required. The form at the bottom is enough to start.",
   },
   {
     step: "02",
     title: "We assign the team",
-    body: "Developers who match the work: web and mobile, ecommerce, or full stack.",
+    body: "We match that note to the specialties further down: web and mobile, a store, UI UX, AI, automation, desktop, or a game.",
   },
   {
     step: "03",
     title: "We agree the scope",
-    body: "What will be built, what will not, and how the work is paid. Nothing starts before that is clear.",
+    body: "Together we write what will be built, what will not, and how the work is paid. Nothing starts before both sides accept that.",
   },
   {
     step: "04",
     title: "We build and hand it over",
-    body: "We ship the agreed release and leave you with something you can run.",
+    body: "We ship the agreed release and leave you with a product you can run, plus the notes you need to keep it going.",
   },
 ] as const;
 
