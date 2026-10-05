@@ -13,10 +13,10 @@ export function Footer() {
               Web and mobile developers who take client orders across industries.
             </p>
             <div className="mt-6">
-              <Link href="/help#contact" className="btn btn-primary border-white bg-white text-ink hover:bg-white/90">
+              <a href="/#contact" className="btn btn-primary border-white bg-white text-ink hover:bg-white/90">
                 Contact us
                 <Arrow />
-              </Link>
+              </a>
             </div>
             <div className="mt-6 flex flex-col gap-1.5 text-[0.9rem]">
               <a
@@ -45,9 +45,15 @@ export function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {column.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-[0.925rem] text-white/70 transition-colors hover:text-white">
-                        {link.label}
-                      </Link>
+                      {link.href.startsWith("/#") ? (
+                        <a href={link.href} className="text-[0.925rem] text-white/70 transition-colors hover:text-white">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className="text-[0.925rem] text-white/70 transition-colors hover:text-white">
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

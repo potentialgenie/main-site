@@ -6,8 +6,7 @@ export const metadata: Metadata = { title: "Accessibility" };
 export default function AccessibilityPage() {
   return (
     <LegalPage
-      eyebrow="Accessibility"
-      title="The site should be usable without a mouse and without color alone."
+      title="Using this site"
       lede="Pages use semantic headings, visible focus, and text that does not depend on a background image. If something blocks you, tell us and we will fix that path."
       sections={[
         {

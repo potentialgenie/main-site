@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={GeistMono.variable}>
+    <html lang="en" className={GeistMono.variable}>
       <body className="min-h-screen antialiased">
         <a
           href="#main"

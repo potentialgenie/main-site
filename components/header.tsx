@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/logo";
@@ -31,26 +30,20 @@ export function Header() {
       <div className="container-page flex h-[4.25rem] items-center justify-between gap-4">
         <Logo />
         <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
-          {nav.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-md px-3 py-2 text-[0.9rem] transition-colors ${
-                  active ? "text-ink" : "text-ink-muted hover:text-ink"
-                }`}
-                aria-current={active ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {nav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="rounded-md px-3 py-2 text-[0.9rem] text-ink-muted transition-colors hover:text-ink"
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link href="/help#contact" className="btn btn-primary btn-compact hidden sm:inline-flex">
+          <a href="/#contact" className="btn btn-primary btn-compact hidden sm:inline-flex">
             Contact us
-          </Link>
+          </a>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line-strong bg-surface xl:hidden"
@@ -70,17 +63,18 @@ export function Header() {
         <nav id="mobile-nav" className="border-t border-line bg-canvas xl:hidden" aria-label="Mobile">
           <div className="container-page flex flex-col py-3">
             {nav.map((item) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
                 className="border-b border-line py-3 text-[0.98rem] text-ink last:border-b-0"
+                onClick={() => setOpen(false)}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
-            <Link href="/help#contact" className="btn btn-primary mt-2 mb-3">
+            <a href="/#contact" className="btn btn-primary mt-2 mb-3" onClick={() => setOpen(false)}>
               Contact us
-            </Link>
+            </a>
           </div>
         </nav>
       ) : null}

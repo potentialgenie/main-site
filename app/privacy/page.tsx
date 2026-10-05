@@ -6,8 +6,7 @@ export const metadata: Metadata = { title: "Privacy" };
 export default function PrivacyPage() {
   return (
     <LegalPage
-      eyebrow="Privacy"
-      title="What we do with a message you send."
+      title="How we use messages"
       lede="This site does not keep an account for you. A note you prepare here is sent through your own email, and that message is what we receive."
       sections={[
         {

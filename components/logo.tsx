@@ -29,7 +29,7 @@ export function Logo({ tone = "ink" }: { tone?: "ink" | "white" }) {
     <Link href="/" className="inline-flex items-center gap-2.5 rounded-md">
       <Mark />
       <span
-        className={`text-[1.15rem] font-extrabold tracking-[-0.04em] whitespace-nowrap ${
+        className={`text-[1.15rem] font-semibold tracking-[-0.04em] whitespace-nowrap ${
           tone === "white" ? "text-white" : "text-ink"
         }`}
       >

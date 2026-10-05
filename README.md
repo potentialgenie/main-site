@@ -2,7 +2,7 @@
 
 Marketing site for a web and mobile development team. Clients review the site and contact the team to work together.
 
-Pages: home, team, technologies, and what we can help.
+The site is a single page. Team, technologies, and contact are sections on that page.
 
 ```bash
 npm install

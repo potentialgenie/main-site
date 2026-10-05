@@ -1,19 +1,17 @@
 import { PageHero } from "@/components/page-hero";
 
 export function LegalPage({
-  eyebrow,
   title,
   lede,
   sections,
 }: {
-  eyebrow: string;
   title: string;
   lede: string;
   sections: { heading: string; body: string }[];
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} lede={lede} />
+      <PageHero title={title} lede={lede} />
       <section className="bg-surface py-16 sm:py-20">
         <div className="container-page max-w-none">
           <div className="max-w-3xl space-y-10">

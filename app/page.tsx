@@ -1,5 +1,13 @@
 import Link from "next/link";
+import { SubmitForm } from "@/components/submit-form";
 import { clientStages, developers, faqs, industries, site, technologyGroups } from "@/lib/site";
+
+const helpAreas = [
+  { title: "A website or web application", body: "Front end, back end, full stack, or a CMS the client can edit." },
+  { title: "A mobile app", body: "Native iOS, native Android, or one codebase in Flutter or React Native." },
+  { title: "A store", body: "Shopify, WooCommerce, or a custom catalog and checkout." },
+  { title: "The product around the code", body: "UX and UI, a prototype, AI inside the product, and testing of the release." },
+];
 
 export default function HomePage() {
   return (
@@ -7,46 +15,98 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-canvas">
         <div className="dot-field pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="container-page relative px-4 py-16 text-center sm:py-20 lg:py-28">
-          <p className="eyebrow">Web and mobile development</p>
-          <h1 className="display mx-auto mt-6 max-w-[12em] text-ink">Developers for the order you already have.</h1>
+          <h1 className="display mx-auto max-w-[12em] text-ink">Developers for client orders</h1>
           <p className="lede mx-auto mt-6 max-w-[38rem]">
             Need a website, a web app, or a mobile product? The team builds it. Review the technologies, then contact us to work together.
           </p>
           <div className="mx-auto mt-8 inline-flex rounded-full border border-ink/10 bg-white p-1 shadow-subtle">
-            <Link href="/help#contact" className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white">
+            <a href="#contact" className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white">
               I need a build
-            </Link>
-            <Link href="/team" className="rounded-full px-5 py-2.5 text-sm font-medium text-ink/70">
+            </a>
+            <a href="#team" className="rounded-full px-5 py-2.5 text-sm font-medium text-ink/70">
               Meet the team
-            </Link>
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="bg-canvas pb-18 sm:pb-22">
+      <section id="help" className="scroll-mt-24 bg-surface py-18 sm:py-22">
+        <div className="container-page">
+          <h2 className="section-title max-w-[16ch]">What we can help with</h2>
+          <p className="lede mt-5 max-w-[62ch]">
+            Potential Genie helps with web and mobile client orders. You describe the product and the industry. The developers are staffed to that order, and work starts when the scope is agreed.
+          </p>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {helpAreas.map((area) => (
+              <article key={area.title} className="border-t border-line-strong pt-5">
+                <h3 className="font-semibold tracking-[-0.012em]">{area.title}</h3>
+                <p className="mt-2.5 text-[0.925rem] leading-relaxed text-ink-muted">{area.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="technologies" className="scroll-mt-24 bg-canvas py-18 sm:py-22">
         <div className="container-page text-center">
-          <h2 className="section-title">Explore by technology</h2>
+          <h2 className="section-title">Web and mobile specialties</h2>
           <p className="lede mx-auto mt-4 max-w-[46ch]">
-            The same groups Upwork uses for Web, Mobile & Software Dev. Open a category to see every specialty and the tools inside it.
+            Every specialty is listed, with the tools the team uses to build it.
           </p>
           <div className="mt-10 overflow-hidden rounded-3xl border border-ink/10 text-left">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
               {technologyGroups.map((group) => (
-                <Link
+                <a
                   key={group.id}
-                  href={`/technologies#${group.id}`}
+                  href={`#${group.id}`}
                   className="flex min-h-32 flex-col items-center justify-center gap-2 border-r border-b border-ink/10 bg-white px-4 py-6 text-center transition-colors hover:bg-sunken"
                 >
                   <span className="font-mono text-[0.7rem] font-semibold tracking-[0.14em] text-ink/45">{group.code}</span>
-                  <span className="max-w-[12rem] text-sm font-semibold leading-tight tracking-[-0.02em]">{group.upwork}</span>
-                </Link>
+                  <span className="max-w-[12rem] text-sm font-semibold leading-tight tracking-[-0.02em]">{group.name}</span>
+                </a>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-sunken py-18 sm:py-22">
+      {technologyGroups.map((group, index) => (
+        <section
+          key={group.id}
+          id={group.id}
+          className={`scroll-mt-24 border-t border-line py-16 sm:py-20 ${index % 2 === 0 ? "bg-canvas" : "bg-surface"}`}
+        >
+          <div className="container-page">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
+              <div>
+                <p className="font-mono text-[0.75rem] font-semibold tracking-[0.14em] text-accent">{group.code}</p>
+                <h2 className="mt-3 text-[1.7rem] font-medium tracking-[-0.03em]">{group.name}</h2>
+                <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-muted">{group.summary}</p>
+              </div>
+              <div className="border-t border-line">
+                {group.specialties.map((specialty) => (
+                  <article key={specialty.name} className="border-b border-line py-5">
+                    <h3 className="text-[1.02rem] font-semibold tracking-[-0.012em]">{specialty.name}</h3>
+                    <p className="mt-2 text-[0.925rem] leading-relaxed text-ink-muted">{specialty.body}</p>
+                    <ul className="mt-3 flex flex-wrap gap-2">
+                      {specialty.stack.map((tool) => (
+                        <li
+                          key={tool}
+                          className="rounded-md border border-line bg-canvas px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.08em] text-ink uppercase"
+                        >
+                          {tool}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section className="border-t border-line bg-sunken py-18 sm:py-22">
         <div className="container-page">
           <div className="text-center">
             <h2 className="section-title">How a client order works</h2>
@@ -56,7 +116,7 @@ export default function HomePage() {
             {clientStages.map((stage) => (
               <li key={stage.step} className="rounded-3xl border border-ink/10 bg-white p-6">
                 <p className="font-mono text-sm font-semibold tracking-[0.14em] text-ink/45">{stage.step}</p>
-                <h3 className="mt-4 text-lg font-bold tracking-[-0.03em]">{stage.title}</h3>
+                <h3 className="mt-4 text-lg font-medium tracking-[-0.03em]">{stage.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{stage.body}</p>
               </li>
             ))}
@@ -64,52 +124,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-canvas py-18 sm:py-22 lg:py-26">
+      <section id="team" className="scroll-mt-24 border-t border-line bg-canvas py-18 sm:py-22 lg:py-26">
         <div className="container-page">
-          <div className="max-w-3xl">
-            <p className="eyebrow">The developers</p>
-            <h2 className="section-title mt-4">The people who take the work.</h2>
-            <p className="lede mt-5 max-w-[58ch]">
-              The team is introduced by practice. Each group is who you are hiring when a client order needs that part of a web or mobile product.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-            {developers.map((developer) => (
-              <article key={developer.title} className="border-t border-line-strong pt-5">
-                <h3 className="text-[1.02rem] font-semibold tracking-[-0.012em]">{developer.title}</h3>
-                <p className="mt-2.5 text-[0.925rem] leading-relaxed text-ink-muted">{developer.body}</p>
+          <h2 className="section-title">Meet the developers</h2>
+          <p className="lede mt-5 max-w-[62ch]">
+            Potential Genie is a web and mobile development team. They are introduced by practice, which is how a client order gets staffed. Individual names are added when a person is on your order, not as a stock portrait.
+          </p>
+          <div className="mt-12 grid gap-8 sm:grid-cols-2">
+            {developers.map((developer, index) => (
+              <article key={developer.title} className="rounded-xl border border-line bg-canvas p-7">
+                <p className="font-mono text-[0.75rem] font-semibold tracking-[0.14em] text-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold tracking-[-0.02em]">{developer.title}</h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">{developer.body}</p>
               </article>
             ))}
           </div>
-          <Link href="/team" className="mt-10 inline-flex text-[0.95rem] font-medium text-ink underline decoration-line-strong underline-offset-4 hover:text-accent hover:decoration-accent">
-            Read the team in full
-          </Link>
         </div>
       </section>
 
-      <section className="border-t border-line bg-surface py-18 sm:py-22 lg:py-26">
-        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-          <div>
-            <p className="eyebrow">Industries</p>
-            <h2 className="section-title mt-4">Where the client orders come from.</h2>
-            <p className="lede mt-5">
-              Upwork’s clients hire web and mobile developers across these industries. The team takes orders in the same spread.
-            </p>
-          </div>
-          <ul className="flex flex-wrap content-start gap-2.5">
-            {industries.map((industry) => (
-              <li key={industry.title} className="rounded-md border border-line bg-canvas px-3.5 py-2.5 text-[0.925rem] text-ink">
-                {industry.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section id="access" className="bg-canvas py-18 sm:py-22">
+      <section id="industries" className="scroll-mt-24 border-t border-line bg-surface py-18 sm:py-22">
         <div className="container-page">
-          <p className="eyebrow">One other kind of help</p>
-          <h2 className="section-title mt-4 max-w-[18ch]">Laptops and PCs for people in financial difficulty.</h2>
+          <h2 className="section-title">Where the client orders come from</h2>
+          <p className="lede mt-5 max-w-[62ch]">
+            The team takes client orders across these industries. The product changes with the field. The developers stay the same.
+          </p>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry) => (
+              <article key={industry.title} className="border-t border-line-strong pt-5">
+                <h3 className="font-semibold tracking-[-0.012em]">{industry.title}</h3>
+                <p className="mt-2.5 text-[0.925rem] leading-relaxed text-ink-muted">{industry.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="access" className="scroll-mt-24 bg-canvas py-18 sm:py-22">
+        <div className="container-page">
+          <h2 className="section-title max-w-[18ch]">Laptops and PCs for people in financial difficulty.</h2>
           <p className="lede mt-5 max-w-[68ch]">
             Some people need a working computer for daily life and cannot buy one. Potential Genie can rent a laptop or a desktop PC. The arrangement is a share of profit or revenue, agreed before the machine goes out. It is not a client order, and it is not free equipment.
           </p>
@@ -152,11 +206,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="faq" className="border-t border-line bg-canvas py-18 sm:py-22 lg:py-26">
+      <section id="faq" className="scroll-mt-24 border-t border-line bg-canvas py-18 sm:py-22 lg:py-26">
         <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
           <div>
-            <p className="eyebrow">Questions</p>
-            <h2 className="section-title mt-4">Before you write.</h2>
+            <h2 className="section-title">Before you write.</h2>
           </div>
           <div className="border-t border-line">
             {faqs.map((item) => (
@@ -177,33 +230,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-canvas py-18 sm:py-22 lg:py-26">
-        <div className="container-page">
-          <p className="eyebrow">Next step</p>
-          <h2 className="section-title mt-4 max-w-[16ch]">Have an order for the team?</h2>
-          <p className="lede mt-5 max-w-[48ch]">
-            Describe the product, who uses it, and whether it is web, mobile, or both.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/help#contact" className="btn btn-primary">
-              Contact us
-              <Arrow />
-            </Link>
-            <Link href="/help" className="btn btn-secondary">
-              What we can help
-            </Link>
+      <section id="contact" className="scroll-mt-24 border-t border-line bg-canvas py-16 sm:py-20">
+        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
+          <div>
+            <h2 className="section-title">Tell us the order.</h2>
+            <p className="lede mt-5">
+              Reviewing the site is the start. Send the product, who uses it, and whether it is web, mobile, or both. The form opens an email draft. Nothing is stored here until you send it.
+            </p>
           </div>
+          <SubmitForm />
         </div>
       </section>
     </>
-  );
-}
-
-function Arrow() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path d="M5 12h14" strokeLinecap="round" />
-      <path d="m12 5 7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

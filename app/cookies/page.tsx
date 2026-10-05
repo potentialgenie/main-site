@@ -6,8 +6,7 @@ export const metadata: Metadata = { title: "Cookies" };
 export default function CookiesPage() {
   return (
     <LegalPage
-      eyebrow="Cookies"
-      title="This site does not set tracking cookies."
+      title="No tracking cookies"
       lede="Potential Genie does not use advertising cookies or a third-party analytics tag on these pages."
       sections={[
         {

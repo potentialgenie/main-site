@@ -24,8 +24,7 @@ export function SubmitForm() {
   if (sent) {
     return (
       <div className="rounded-xl border border-line bg-surface p-7 sm:p-8">
-        <p className="eyebrow">Ready to send</p>
-        <h2 className="mt-3 text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h2>
         <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
           If your mail app did not open, use the link below. Nothing is stored on this site until that message is sent.
         </p>
