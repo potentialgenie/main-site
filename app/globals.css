@@ -10,10 +10,11 @@
   --color-ink-faint: #8b939c;
   --color-line: #e7e8ea;
   --color-line-strong: #d5d8dc;
-  --color-accent: #0f1419;
-  --color-accent-soft: #9aa3ad;
-  --color-accent-wash: #f6f7f8;
-  --color-accent-line: #e6e8eb;
+  --color-accent: #3b46c4;
+  --color-accent-strong: #2c369e;
+  --color-accent-soft: #9aa2f0;
+  --color-accent-wash: #eef0fb;
+  --color-accent-line: #d5daf6;
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --shadow-raised: 0 18px 50px -28px rgb(20 22 26 / 0.45);
@@ -32,7 +33,7 @@ body {
 }
 
 ::selection {
-  background: #e7e8ea;
+  background: var(--color-accent-wash);
   color: var(--color-ink);
 }
 
@@ -62,10 +63,64 @@ body {
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
-  font-weight: 500;
+  font-size: 2.1rem;
+  font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.08;
+  line-height: 1.15;
+}
+
+@media (min-width: 640px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+.reveal-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%) rotate(4deg);
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease;
+}
+
+.reveal-word[data-shown="true"] {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.rise {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease;
+}
+
+.rise[data-shown="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lift {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -24px rgb(20 22 26 / 0.4);
 }
 
 .lede {
@@ -111,16 +166,16 @@ body {
 .btn-primary {
   height: 3rem;
   padding-inline: 1.5rem;
-  background: var(--color-ink);
+  background: var(--color-accent);
   color: white;
-  border-color: var(--color-ink);
+  border-color: var(--color-accent);
   font-size: 0.95rem;
   box-shadow: var(--shadow-subtle);
 }
 
 .btn-primary:hover {
-  background: var(--color-ink-strong);
-  border-color: var(--color-ink-strong);
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
 }
 
 .btn-secondary {
@@ -174,7 +229,18 @@ select:focus-visible {
   }
 
   .btn,
-  .arrow-nudge {
+  .arrow-nudge,
+  .reveal-word {
     transition: none;
+  }
+
+  .reveal-word,
+  .rise {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lift:hover {
+    transform: none;
   }
 }

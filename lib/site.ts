@@ -11,7 +11,6 @@ export const site = {
 export const nav = [
   { href: "/#help", label: "What we can help" },
   { href: "/#technologies", label: "Technologies" },
-  { href: "/#team", label: "Team" },
 ] as const;
 
 export const footerColumns = [
@@ -19,8 +18,7 @@ export const footerColumns = [
     title: "Work",
     links: [
       { href: "/#help", label: "What we can help" },
-      { href: "/#contact", label: "Contact the team" },
-      { href: "/#team", label: "Developers" },
+      { href: "/#contact", label: "Tell us the order" },
       { href: "/#technologies", label: "Technologies" },
     ],
   },
@@ -41,41 +39,6 @@ export const footerColumns = [
       { href: "/cookies", label: "Cookies" },
       { href: "/accessibility", label: "Accessibility" },
     ],
-  },
-] as const;
-
-export const developers = [
-  {
-    title: "Front-end developers",
-    body: "They build the screens people use. React, Next.js, Vue, and TypeScript are the usual tools, matched to the product rather than the other way around.",
-  },
-  {
-    title: "Back-end developers",
-    body: "They build the APIs, data, accounts, and integrations a web or mobile product depends on after the interface is no longer a picture.",
-  },
-  {
-    title: "Full-stack developers",
-    body: "They take a client order from the interface through to the server, which is how a smaller engagement stays with one responsible developer.",
-  },
-  {
-    title: "iOS developers",
-    body: "They ship native iPhone and iPad apps in Swift when the order needs the platform itself, not a shared codebase.",
-  },
-  {
-    title: "Android developers",
-    body: "They ship native Android apps in Kotlin, including the device and store constraints that cross-platform work sometimes hides.",
-  },
-  {
-    title: "Cross-platform developers",
-    body: "They build one product for iOS and Android with Flutter or React Native when that is the right trade for the client’s budget and timeline.",
-  },
-  {
-    title: "Ecommerce developers",
-    body: "They launch and change stores on Shopify, WooCommerce, and custom checkout flows.",
-  },
-  {
-    title: "Designers",
-    body: "They do UX and UI, web design, mobile design, and prototypes, so the developers are not guessing at the product while they build it.",
   },
 ] as const;
 
@@ -185,18 +148,8 @@ export const technologyGroups = [
     ],
   },
   {
-    id: "qa-testing",
-    code: "06",
-    name: "QA Testing",
-    summary: "Testing sits beside the build, to check a release rather than as a standing offer with no product.",
-    specialties: [
-      { name: "Automation Testing", body: "Repeatable checks around the flows a client order must not break.", stack: ["End-to-end tests", "CI"] },
-      { name: "Manual Testing", body: "A person walks the release on the devices and browsers the users have.", stack: ["Web", "iOS", "Android"] },
-    ],
-  },
-  {
     id: "scripts-automation",
-    code: "07",
+    code: "06",
     name: "Scripts & Automation",
     summary: "A script or automation when a full product is the wrong size.",
     specialties: [
@@ -205,7 +158,7 @@ export const technologyGroups = [
   },
   {
     id: "desktop",
-    code: "08",
+    code: "07",
     name: "Desktop Application Development",
     summary: "Software that runs on a computer rather than in a browser or an app store.",
     specialties: [
@@ -214,7 +167,7 @@ export const technologyGroups = [
   },
   {
     id: "games",
-    code: "09",
+    code: "08",
     name: "Game Design & Development",
     summary: "Games, kept separate from the mobile-game specialty above.",
     specialties: [
@@ -269,4 +222,51 @@ export const faqs = [
   },
 ] as const;
 
-export const requestTypes = ["A website or web application", "A mobile app", "Web and mobile together", "A question about the team"] as const;
+export const collaborationRequest = "A collaboration to earn, for someone in financial difficulty";
+
+export const requestTypes = [
+  {
+    label: "Web development",
+    options: [
+      "Front-end development for a website or web application",
+      "Back-end development: APIs, accounts, and data",
+      "Full-stack web application, from interface to database",
+      "CMS website the client can update",
+    ],
+  },
+  {
+    label: "Mobile development",
+    options: [
+      "Native iOS application",
+      "Native Android application",
+      "Cross-platform application in Flutter or React Native",
+      "Mobile game",
+    ],
+  },
+  {
+    label: "Design",
+    options: [
+      "UX and UI design for a web or mobile product",
+      "Web or mobile interface design",
+      "Clickable prototype before the build",
+    ],
+  },
+  {
+    label: "Product",
+    options: [
+      "Ecommerce store: catalog, checkout, and accounts",
+      "AI assistant or model integration inside a product",
+      "Script or internal automation",
+      "Desktop application",
+      "Video game",
+    ],
+  },
+  {
+    label: "The engagement",
+    options: [
+      "Web and mobile together, one order",
+      "Help defining the scope before a build",
+      collaborationRequest,
+    ],
+  },
+] as const;

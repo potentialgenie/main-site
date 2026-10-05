@@ -13,8 +13,8 @@ const nextConfig: NextConfig = {
       { source: "/devices", destination: "/#access", permanent: false },
       { source: "/capabilities", destination: "/#technologies", permanent: false },
       { source: "/work", destination: "/#help", permanent: false },
-      { source: "/about", destination: "/#team", permanent: false },
-      { source: "/team", destination: "/#team", permanent: false },
+      { source: "/about", destination: "/#contact", permanent: false },
+      { source: "/team", destination: "/#contact", permanent: false },
       { source: "/technologies", destination: "/#technologies", permanent: false },
       { source: "/help", destination: "/#help", permanent: false },
     ];

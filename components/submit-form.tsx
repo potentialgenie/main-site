@@ -1,18 +1,28 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { requestTypes, site } from "@/lib/site";
+import { FormEvent, useEffect, useId, useRef, useState } from "react";
+import { collaborationRequest, requestTypes, site } from "@/lib/site";
 
 export function SubmitForm() {
   const [sent, setSent] = useState(false);
   const [draft, setDraft] = useState("");
+  const [request, setRequest] = useState("");
+  const [requestError, setRequestError] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("intent") === "collaboration") setRequest(collaborationRequest);
+  }, []);
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!request) {
+      setRequestError(true);
+      return;
+    }
     const data = new FormData(event.currentTarget);
     const name = String(data.get("name") ?? "");
     const email = String(data.get("email") ?? "");
-    const request = String(data.get("request") ?? "");
     const detail = String(data.get("detail") ?? "");
     const body = [`Name: ${name}`, `Email: ${email}`, `Request: ${request}`, "", detail].join("\n");
     const href = `mailto:${site.email}?subject=${encodeURIComponent(`Request from ${name}`)}&body=${encodeURIComponent(body)}`;
@@ -22,17 +32,7 @@ export function SubmitForm() {
   }
 
   if (sent) {
-    return (
-      <div className="rounded-xl border border-line bg-surface p-7 sm:p-8">
-        <h2 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h2>
-        <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
-          If your mail app did not open, use the link below. Nothing is stored on this site until that message is sent.
-        </p>
-        <a href={draft} className="btn btn-primary mt-6">
-          Open the draft again
-        </a>
-      </div>
-    );
+    return <DraftReady draft={draft} />;
   }
 
   return (
@@ -41,22 +41,14 @@ export function SubmitForm() {
         <Field label="Name" name="name" autoComplete="name" />
         <Field label="Email" name="email" type="email" autoComplete="email" />
       </div>
-      <label className="mt-5 block text-[0.85rem] font-medium text-ink">
-        What do you need?
-        <select
-          name="request"
-          required
-          defaultValue=""
-          className="mt-2 h-12 w-full rounded-full border border-line-strong bg-canvas px-4 text-[0.95rem] font-normal"
-        >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {requestTypes.map((item) => (
-            <option key={item}>{item}</option>
-          ))}
-        </select>
-      </label>
+      <RequestMenu
+        value={request}
+        invalid={requestError}
+        onChange={(next) => {
+          setRequest(next);
+          setRequestError(false);
+        }}
+      />
       <label className="mt-5 block text-[0.85rem] font-medium text-ink">
         The detail
         <textarea
@@ -74,6 +66,128 @@ export function SubmitForm() {
         Prefer to write directly? {site.email}
       </p>
     </form>
+  );
+}
+
+function DraftReady({ draft }: { draft: string }) {
+  return (
+    <div className="rounded-xl border border-line bg-surface p-7 sm:p-8">
+      <h3 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h3>
+      <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
+        If your mail app did not open, use the link below. Nothing is stored on this site until that message is sent.
+      </p>
+      <a href={draft} className="btn btn-primary mt-6">
+        Open the draft again
+      </a>
+    </div>
+  );
+}
+
+function RequestMenu({
+  value,
+  invalid,
+  onChange,
+}: {
+  value: string;
+  invalid: boolean;
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const labelId = useId();
+  const listId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(event: MouseEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div className="mt-5">
+      <p id={labelId} className="text-[0.85rem] font-medium text-ink">
+        What do you need?
+      </p>
+      <div ref={rootRef} className="relative mt-2">
+        <button
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-labelledby={labelId}
+          aria-invalid={invalid}
+          onClick={() => setOpen((current) => !current)}
+          className={`flex h-12 w-full items-center justify-between gap-3 rounded-full border bg-canvas px-4 text-left text-[0.95rem] font-normal ${
+            invalid ? "border-accent" : "border-line-strong"
+          }`}
+        >
+          <span className={`truncate ${value ? "text-ink" : "text-ink-muted"}`}>{value || "Choose one"}</span>
+          <Chevron open={open} />
+        </button>
+        {invalid ? <p className="mt-2 px-4 text-[0.8rem] text-accent">Choose what you need.</p> : null}
+        {open ? (
+          <div
+            id={listId}
+            role="listbox"
+            aria-labelledby={labelId}
+            className="absolute bottom-full left-0 z-20 mb-2 max-h-80 w-full overflow-auto rounded-3xl border border-line bg-white p-2 shadow-raised"
+          >
+            {requestTypes.map((group) => (
+              <div key={group.label} className="py-1">
+                <p className="px-3 pt-2 pb-1 font-mono text-[0.68rem] font-semibold tracking-[0.14em] text-accent uppercase">
+                  {group.label}
+                </p>
+                {group.options.map((item) => {
+                  const selected = value === item;
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      role="option"
+                      aria-selected={selected}
+                      onClick={() => {
+                        onChange(item);
+                        setOpen(false);
+                      }}
+                      className={`block w-full rounded-2xl px-3 py-2.5 text-left text-[0.925rem] leading-snug ${
+                        selected ? "bg-accent text-white" : "text-ink hover:bg-accent-wash"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={`h-4 w-4 shrink-0 text-ink-muted transition-transform ${open ? "rotate-180" : ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
