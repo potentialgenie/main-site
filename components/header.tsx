@@ -1,0 +1,89 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Logo } from "@/components/logo";
+import { nav } from "@/lib/site";
+
+export function Header() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  return (
+    <header
+      className={`sticky top-0 z-50 border-b bg-canvas/95 backdrop-blur-md transition-colors ${
+        scrolled || open ? "border-line" : "border-transparent"
+      }`}
+    >
+      <div className="container-page flex h-[4.25rem] items-center justify-between gap-4">
+        <Logo />
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+          {nav.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`rounded-md px-3 py-2 text-[0.9rem] transition-colors ${
+                  active ? "text-ink" : "text-ink-muted hover:text-ink"
+                }`}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+        <div className="flex items-center gap-2">
+          <Link href="/help#contact" className="btn btn-primary btn-compact hidden sm:inline-flex">
+            Contact us
+          </Link>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line-strong bg-surface xl:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+            <span className="flex w-4 flex-col gap-1" aria-hidden="true">
+              <span className={`h-px bg-ink transition ${open ? "translate-y-[2.5px] rotate-45" : ""}`} />
+              <span className={`h-px bg-ink transition ${open ? "-translate-y-[2.5px] -rotate-45" : ""}`} />
+            </span>
+          </button>
+        </div>
+      </div>
+      {open ? (
+        <nav id="mobile-nav" className="border-t border-line bg-canvas xl:hidden" aria-label="Mobile">
+          <div className="container-page flex flex-col py-3">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="border-b border-line py-3 text-[0.98rem] text-ink last:border-b-0"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/help#contact" className="btn btn-primary mt-2 mb-3">
+              Contact us
+            </Link>
+          </div>
+        </nav>
+      ) : null}
+    </header>
+  );
+}
