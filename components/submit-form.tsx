@@ -39,8 +39,8 @@ export function SubmitForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-xl border border-line bg-card p-7 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name" name="name" autoComplete="name" />
-        <Field label="Email" name="email" type="email" autoComplete="email" />
+        <Field label="Name" name="name" autoComplete="name" placeholder="Your name" />
+        <Field label="Email" name="email" type="email" autoComplete="email" placeholder="you@company.com" />
       </div>
       <RequestMenu
         value={request}
@@ -56,12 +56,12 @@ export function SubmitForm() {
           name="detail"
           required
           rows={6}
-          placeholder="What the product is, who uses it, the industry, and whether it is web, mobile, or both."
+          placeholder="What the product is, who uses it, and the industry."
           className="mt-2 w-full resize-y rounded-3xl border border-line-strong bg-canvas px-4 py-3 text-[0.95rem] font-normal leading-relaxed"
         />
       </label>
       <button type="submit" className="btn btn-primary mt-6">
-        Open email draft
+        Send
       </button>
       <p className="mt-4 text-[0.825rem] leading-relaxed text-ink-muted">
         Or email us directly at {site.email}
@@ -202,11 +202,13 @@ function Field({
   name,
   type = "text",
   autoComplete,
+  placeholder,
 }: {
   label: string;
   name: string;
   type?: string;
   autoComplete?: string;
+  placeholder?: string;
 }) {
   return (
     <label className="block text-[0.85rem] font-medium text-ink">
@@ -216,7 +218,8 @@ function Field({
         type={type}
         required
         autoComplete={autoComplete}
-        className="mt-2 h-12 w-full rounded-full border border-line-strong bg-canvas px-4 text-[0.95rem] font-normal"
+        placeholder={placeholder}
+        className="mt-2 h-12 w-full rounded-full border border-line-strong bg-canvas px-4 text-[0.95rem] font-normal placeholder:text-ink-faint"
       />
     </label>
   );

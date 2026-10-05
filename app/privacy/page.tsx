@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Privacy" };
 
@@ -23,7 +24,7 @@ export default function PrivacyPage() {
         },
         {
           heading: "Questions",
-          body: "Send privacy questions to hello@potentialgenie.com.",
+          body: `Send privacy questions to ${site.email}.`,
         },
       ]}
     />

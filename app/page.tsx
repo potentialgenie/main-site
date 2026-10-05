@@ -8,9 +8,8 @@ import { TechnologyBoard } from "@/components/technology-board";
 import { clientStages, faqs, industries } from "@/lib/site";
 
 const helpAreas = [
-  { title: "A website or web application", body: "Front end, back end, full stack, or a CMS you can edit." },
-  { title: "A mobile app", body: "Native iOS, native Android, or one codebase in Flutter or React Native." },
-  { title: "A store", body: "Shopify, WooCommerce, or a custom catalog and checkout." },
+  { title: "Web & Mobile Development", body: "Sites and apps: front end, back end, full stack, a CMS, and native or cross-platform mobile." },
+  { title: "A store", body: "WooCommerce, Magento, Medusa, or a custom catalog and checkout." },
   { title: "Design and AI", body: "UX, UI, a prototype, and AI features inside the product." },
 ];
 
@@ -66,7 +65,7 @@ export default function HomePage() {
               Describe the product and the industry. We assign developers to that order. Work starts when the scope is agreed.
             </p>
           </Rise>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {helpAreas.map((area, index) => (
               <Rise key={area.title} delay={index * 70} className="h-full">
                 <article className="lift h-full rounded-3xl border border-ink/10 bg-card p-6">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Accessibility" };
 
@@ -15,7 +16,7 @@ export default function AccessibilityPage() {
         },
         {
           heading: "Report a barrier",
-          body: "Email hello@potentialgenie.com with the page address and what you were trying to do. We treat that as something to fix.",
+          body: `Email ${site.email} with the page address and what you were trying to do. We treat that as something to fix.`,
         },
       ]}
     />

@@ -15,7 +15,13 @@ export function TechnologyBoard() {
 
   useEffect(() => {
     const sync = () => {
-      const id = window.location.hash.replace("#", "");
+      const raw = window.location.hash.replace("#", "");
+      const id =
+        raw === "web-development" || raw === "mobile-development"
+          ? "web-mobile-development"
+          : raw === "web-mobile-design"
+            ? "ui-ux-design"
+            : raw;
       setActive(technologyGroups.some((group) => group.id === id) ? id : null);
     };
     sync();

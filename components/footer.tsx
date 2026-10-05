@@ -63,7 +63,7 @@ export function Footer() {
         </div>
         <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-[0.825rem] text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Potential Genie. All rights reserved.</p>
-          <p>potentialgenie.com</p>
+          <p>makeit-real.world</p>
         </div>
       </div>
     </footer>
