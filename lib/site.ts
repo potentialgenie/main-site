@@ -9,38 +9,62 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "/#help", label: "What we help with" },
-  { href: "/#process", label: "How it works" },
-  { href: "/#technologies", label: "Technologies" },
+  { href: "/#about", label: "About Us" },
+  { href: "/#help", label: "Services" },
+  { href: "/#technologies", label: "Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/#contact", label: "Contact" },
+] as const;
+
+// The side panel lists every section, including the ones left out of the header bar.
+export const sideNav = [
+  { href: "/#about", label: "About Us" },
+  { href: "/#help", label: "Services" },
+  { href: "/#technologies", label: "Work" },
   { href: "/#industries", label: "Industries" },
   { href: "/#access", label: "Collaborate" },
+  { href: "/#process", label: "Process" },
   { href: "/#faq", label: "FAQ" },
+  { href: "/#contact", label: "Contact" },
+] as const;
+
+// Short two-row link block in the header, in the place the reference uses for social links.
+export const quickLinks = [
+  { href: "/#web-mobile-development", label: "Web." },
+  { href: "/#ui-ux-design", label: "UX." },
+  { href: "/#ai-apps", label: "AI." },
+  { href: "/#ecommerce-development", label: "Shop." },
 ] as const;
 
 export const footerColumns = [
   {
-    title: "Work",
-    links: [
-      { href: "/#help", label: "What we help with" },
-      { href: "/#contact", label: "Tell us the order" },
-      { href: "/#technologies", label: "Technologies" },
-    ],
-  },
-  {
-    title: "Specialties",
-    links: [
-      { href: "/#web-mobile-development", label: "Web & Mobile Development" },
-      { href: "/#ui-ux-design", label: "UI UX Design" },
-      { href: "/#ecommerce-development", label: "Ecommerce" },
-    ],
-  },
-  {
     title: "Legal",
     links: [
       { href: "/privacy", label: "Privacy" },
-      { href: "/terms", label: "Terms" },
-      { href: "/cookies", label: "Cookies" },
+      { href: "/terms", label: "Terms of service" },
+      { href: "/cookies", label: "Cookie Policy" },
       { href: "/accessibility", label: "Accessibility" },
+    ],
+  },
+  {
+    title: "Top Links",
+    links: [
+      { href: "/#about", label: "About" },
+      { href: "/#help", label: "Services" },
+      { href: "/#industries", label: "Industries" },
+      { href: "/#access", label: "Collaborate" },
+      { href: "/#faq", label: "FAQ" },
+      { href: "/#contact", label: "Contact Us" },
+    ],
+  },
+  {
+    title: "Explore",
+    links: [
+      { href: "/#web-mobile-development", label: "Web & Mobile" },
+      { href: "/#ui-ux-design", label: "UI UX Design" },
+      { href: "/#ecommerce-development", label: "Ecommerce" },
+      { href: "/#ai-apps", label: "AI Apps" },
+      { href: "/#team", label: "Team Member" },
     ],
   },
 ] as const;
@@ -289,4 +313,42 @@ export const requestTypes = [
       collaborationRequest,
     ],
   },
+] as const;
+
+// Shown in the testimonial-style cards. These are our own commitments, not client quotes.
+export const promises = [
+  {
+    title: "Scope Agreed First",
+    tag: "Before work starts",
+    image: "/images/handshake.jpg",
+    body: "We write down what will be built, what will not, and how it is paid. Nothing starts before both sides accept it.",
+  },
+  {
+    title: "One Team, Whole Build",
+    tag: "During the build",
+    image: "/images/web.jpg",
+    body: "Design, front end, back end, and mobile stay in one order, so you never coordinate three separate vendors.",
+  },
+  {
+    title: "A Product You Can Run",
+    tag: "At handover",
+    image: "/images/desktop.jpg",
+    body: "We ship the agreed release with the notes you need to keep it going after launch.",
+  },
+  {
+    title: "A Short Note Is Enough",
+    tag: "First message",
+    image: "/images/design.jpg",
+    body: "Tell us the product and who uses it. We reply with how we would build it and what the first release needs.",
+  },
+] as const;
+
+// Shown in the team-style cards: the specialist roles inside the team, not named people.
+export const specialists = [
+  { role: "Front-End Developers", stack: "React · Next.js · Vue", image: "/images/web.jpg" },
+  { role: "Mobile Developers", stack: "Swift · Kotlin · Flutter", image: "/images/mobile.jpg" },
+  { role: "UI UX Designers", stack: "Figma · Prototypes", image: "/images/design.jpg" },
+  { role: "AI Engineers", stack: "OpenAI · Anthropic · RAG", image: "/images/AI.jpg" },
+  { role: "Automation Engineers", stack: "Make · n8n · Python", image: "/images/automation.jpg" },
+  { role: "Game Developers", stack: "Unity · Unreal · Godot", image: "/images/game-development.png" },
 ] as const;

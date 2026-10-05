@@ -1,17 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Plus } from "@/components/icons";
 import { technologyGroups } from "@/lib/site";
 
 function motion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 }
 
+const filters = [
+  { label: "View All", ids: null },
+  { label: "Development", ids: ["web-mobile-development", "desktop"] },
+  { label: "UI UX Design", ids: ["ui-ux-design"] },
+  { label: "Ecommerce", ids: ["ecommerce-development"] },
+  { label: "AI & Automation", ids: ["ai-apps", "scripts-automation"] },
+  { label: "Games", ids: ["games"] },
+] as const;
+
 export function TechnologyBoard() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<string | null>(null);
-  const [index, setIndex] = useState(0);
+  const [filter, setFilter] = useState(0);
 
   useEffect(() => {
     const sync = () => {
@@ -22,7 +31,9 @@ export function TechnologyBoard() {
           : raw === "web-mobile-design"
             ? "ui-ux-design"
             : raw;
-      setActive(technologyGroups.some((group) => group.id === id) ? id : null);
+      const known = technologyGroups.some((group) => group.id === id);
+      setActive(known ? id : null);
+      if (known) setFilter(0);
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -36,141 +47,89 @@ export function TechnologyBoard() {
     setActive(next || null);
   }
 
-  function readIndex() {
-    const scroller = scrollerRef.current;
-    const card = scroller?.querySelector<HTMLElement>("[data-card]");
-    if (!scroller || !card) return;
-    const gap = Number.parseFloat(getComputedStyle(scroller).columnGap) || 0;
-    const next = Math.round(scroller.scrollLeft / (card.offsetWidth + gap));
-    setIndex(Math.min(technologyGroups.length - 1, Math.max(0, next)));
-  }
-
-  function step(direction: 1 | -1) {
-    const scroller = scrollerRef.current;
-    const card = scroller?.querySelector<HTMLElement>("[data-card]");
-    if (!scroller || !card) return;
-    const gap = Number.parseFloat(getComputedStyle(scroller).columnGap) || 0;
-    const delta = card.offsetWidth + gap;
-    const max = scroller.scrollWidth - scroller.clientWidth;
-    const behavior = motion();
-    if (direction > 0 && scroller.scrollLeft >= max - 2) {
-      scroller.scrollTo({ left: 0, behavior });
-      return;
-    }
-    if (direction < 0 && scroller.scrollLeft <= 2) {
-      scroller.scrollTo({ left: max, behavior });
-      return;
-    }
-    scroller.scrollBy({ left: direction * delta, behavior });
-  }
-
   const selected = technologyGroups.find((group) => group.id === active);
 
   useEffect(() => {
     if (!active) return;
-    const scroller = scrollerRef.current;
-    const card = scroller?.querySelector<HTMLElement>(`[data-id="${active}"]`);
-    if (scroller && card) {
-      const scrollerBox = scroller.getBoundingClientRect();
-      const cardBox = card.getBoundingClientRect();
-      const delta = cardBox.left - scrollerBox.left - (scroller.clientWidth - cardBox.width) / 2;
-      const left = Math.max(0, Math.min(scroller.scrollWidth - scroller.clientWidth, scroller.scrollLeft + delta));
-      scroller.scrollTo({ left, behavior: motion() });
-    }
     document.getElementById(active)?.scrollIntoView({ block: "nearest", behavior: motion() });
   }, [active]);
 
+  const allowed = filters[filter].ids as readonly string[] | null;
+  const visible = technologyGroups.filter((group) => !allowed || allowed.includes(group.id));
+
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <p className="font-mono text-[0.75rem] font-semibold tracking-[0.14em] text-ink-faint" aria-live="polite">
-          {String(index + 1).padStart(2, "0")} / {String(technologyGroups.length).padStart(2, "0")}
-        </p>
-        <div className="flex gap-2">
+      <div className="flex flex-wrap justify-center gap-3" role="group" aria-label="Filter practices">
+        {filters.map((item, index) => (
           <button
+            key={item.label}
             type="button"
-            aria-label="Previous category"
-            onClick={() => step(-1)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong bg-card text-ink"
+            aria-pressed={filter === index}
+            onClick={() => setFilter(index)}
+            className={`border px-4 py-2 text-[1rem] transition-colors ${
+              filter === index ? "border-accent bg-accent font-medium text-white" : "border-line text-ink-muted hover:border-accent hover:bg-accent hover:text-white"
+            }`}
           >
-            <Chevron direction="left" />
+            {item.label}
           </button>
-          <button
-            type="button"
-            aria-label="Next category"
-            onClick={() => step(1)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong bg-card text-ink"
-          >
-            <Chevron direction="right" />
-          </button>
-        </div>
+        ))}
       </div>
-      <div
-        ref={scrollerRef}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="What we build"
-        tabIndex={0}
-        onScroll={readIndex}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowRight") {
-            event.preventDefault();
-            step(1);
-          }
-          if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            step(-1);
-          }
-        }}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {technologyGroups.map((group) => {
+      <div className="mt-16 grid gap-[1.875rem] md:grid-cols-2">
+        {visible.map((group, index) => {
           const open = group.id === active;
           return (
             <button
               key={group.id}
               type="button"
-              data-card
-              data-id={group.id}
               aria-expanded={open}
               aria-controls={group.id}
-              aria-label={group.name}
               onClick={() => choose(group.id)}
-              className={`lift relative flex aspect-[4/3] w-[82%] shrink-0 snap-start flex-col justify-end overflow-hidden rounded-[1.6rem] p-5 text-left text-white sm:w-[48%] lg:w-[32%] ${
-                open ? "ring-2 ring-accent ring-inset" : ""
-              }`}
+              className={`group relative block aspect-[7/5] overflow-hidden text-left ${visible.length % 2 && index === 0 ? "md:col-span-2 md:aspect-[14/5]" : ""} ${open ? "outline-2 outline-offset-4 outline-accent" : ""}`}
             >
-              <Image
-                src={group.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 380px, 80vw"
-                className="object-cover"
-              />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#0f1419]/85 via-[#0f1419]/20 to-transparent" />
-              {open ? <span className="pointer-events-none absolute inset-0 ring-2 ring-accent ring-inset" /> : null}
-              <span className="relative font-mono text-[0.7rem] font-semibold tracking-[0.14em] text-white/80">{group.code}</span>
-              <span className="relative mt-1 text-sm font-semibold leading-tight tracking-[-0.02em]">{group.name}</span>
+              <Image src={group.image} alt="" fill sizes="(min-width: 768px) 620px, 100vw" className="photo-mono object-cover" />
+              <span className="absolute inset-0 bg-[#131313]/25 transition-colors duration-500 group-hover:bg-transparent" />
+              <span
+                className={`absolute bottom-6 left-6 flex max-w-[calc(100%-3rem)] items-center gap-6 bg-canvas py-5 pr-5 pl-6 transition-all duration-500 ${
+                  open ? "" : "lg:translate-y-6 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100"
+                }`}
+              >
+                <span>
+                  <span className="block text-[0.9rem] text-ink-muted">Practice {group.code}</span>
+                  <span className="font-display mt-1 block text-[1.35rem] leading-snug font-bold text-ink">{group.name}</span>
+                </span>
+                <span className={`inline-flex h-12 w-12 shrink-0 items-center justify-center bg-accent text-white transition-transform duration-300 ${open ? "rotate-45" : ""}`}>
+                  <Plus />
+                </span>
+              </span>
             </button>
           );
         })}
       </div>
       {selected ? (
-        <div id={selected.id} className="panel-in scroll-mt-28 mt-4 overflow-hidden rounded-[2rem] border border-ink/10 bg-card px-5 py-8 sm:px-8">
-          <p className="font-mono text-[0.75rem] font-semibold tracking-[0.14em] text-accent">{selected.code}</p>
-          <h2 className="mt-2 text-[1.7rem] font-medium tracking-[-0.03em]">{selected.name}</h2>
-          <p className="mt-3 max-w-[62ch] text-[0.98rem] leading-relaxed text-ink-muted">{selected.summary}</p>
-          <div className="mt-6 border-t border-line">
+        <div id={selected.id} className="panel-in mt-8 scroll-mt-32 border border-line border-t-4 border-t-accent bg-card px-6 py-9 sm:px-10">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <p className="eyebrow">Practice {selected.code}</p>
+              <h3 className="mt-3 text-[2rem] font-bold">{selected.name}</h3>
+              <p className="mt-3 max-w-[62ch] text-[0.98rem] leading-relaxed text-ink-muted">{selected.summary}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => choose(selected.id)}
+              aria-label={`Close ${selected.name}`}
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-line-strong text-ink transition-colors hover:border-accent hover:bg-accent hover:text-white"
+            >
+              <Plus className="h-4 w-4 rotate-45" />
+            </button>
+          </div>
+          <div className="mt-8 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
             {selected.specialties.map((specialty) => (
-              <article key={specialty.name} className="border-b border-line py-5">
-                <h3 className="text-[1.02rem] font-semibold tracking-[-0.012em]">{specialty.name}</h3>
+              <article key={specialty.name} className="bg-card p-6">
+                <h4 className="text-[1.15rem] font-bold">{specialty.name}</h4>
                 <p className="mt-2 text-[0.925rem] leading-relaxed text-ink-muted">{specialty.body}</p>
-                <ul className="mt-3 flex flex-wrap gap-2">
+                <ul className="mt-4 flex flex-wrap gap-2">
                   {specialty.stack.map((tool) => (
-                    <li
-                      key={tool}
-                      className="rounded-md border border-line bg-canvas px-2.5 py-1 font-mono text-[0.68rem] tracking-[0.08em] text-ink uppercase"
-                    >
+                    <li key={tool} className="bg-chip px-3 py-1.5 text-[0.8rem] text-ink">
                       {tool}
                     </li>
                   ))}
@@ -181,19 +140,5 @@ export function TechnologyBoard() {
         </div>
       ) : null}
     </div>
-  );
-}
-
-function Chevron({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path
-        d={direction === "left" ? "M11 4.5 6.5 9 11 13.5" : "M7 4.5 11.5 9 7 13.5"}
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

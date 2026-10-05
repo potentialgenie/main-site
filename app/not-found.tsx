@@ -3,7 +3,7 @@ import { RevealTitle } from "@/components/reveal-title";
 
 export default function NotFound() {
   return (
-    <section className="bg-canvas py-24">
+    <section className="bg-canvas pt-[12.625rem] pb-24">
       <div className="container-page max-w-xl">
         <RevealTitle as="h1" className="display">
           Page not found

@@ -15,10 +15,12 @@ export function HashLink({
   href,
   className,
   children,
+  "aria-label": ariaLabel,
 }: {
   href: `#${string}`;
   className?: string;
   children: ReactNode;
+  "aria-label"?: string;
 }) {
   function onClick(event: MouseEvent<HTMLAnchorElement>) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -41,7 +43,7 @@ export function HashLink({
   }
 
   return (
-    <a href={href} onClick={onClick} className={className}>
+    <a href={href} onClick={onClick} className={className} aria-label={ariaLabel}>
       {children}
     </a>
   );
