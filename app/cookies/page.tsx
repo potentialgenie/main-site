@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Cookies" };
 
@@ -7,7 +8,7 @@ export default function CookiesPage() {
   return (
     <LegalPage
       title="No tracking cookies"
-      lede="Potential Genie does not use advertising cookies or a third-party analytics tag on these pages."
+      lede={`${site.name} does not use advertising cookies or a third-party analytics tag on these pages.`}
       sections={[
         {
           heading: "What may still be stored",

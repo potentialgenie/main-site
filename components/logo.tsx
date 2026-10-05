@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site } from "@/lib/site";
 
 export function Mark({ className = "h-7 w-7", tone = "ink" }: { className?: string; tone?: "ink" | "white" }) {
   const onDark = tone === "white";
@@ -34,7 +35,7 @@ export function Logo({ tone = "ink" }: { tone?: "ink" | "white" }) {
           tone === "white" ? "text-white" : "text-ink"
         }`}
       >
-        Potential Genie
+        {site.name}
       </span>
     </Link>
   );

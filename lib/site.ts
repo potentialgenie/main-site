@@ -1,8 +1,8 @@
 export const site = {
-  name: "Potential Genie",
-  title: "Potential Genie",
+  name: "Make It Real",
+  title: "Make It Real",
   description:
-    "Potential Genie is a web and mobile development team. Clients hire us to design and build products across industries.",
+    "Make It Real is a web and mobile development team. Clients hire us to design and build products across industries.",
   email: "hello@makeit-real.world",
   supportEmail: "support@makeit-real.world",
   url: "https://makeit-real.world",
