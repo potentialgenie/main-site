@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { collaborationRequest, requestTypes, site } from "@/lib/site";
 
@@ -8,11 +9,11 @@ export function SubmitForm() {
   const [draft, setDraft] = useState("");
   const [request, setRequest] = useState("");
   const [requestError, setRequestError] = useState(false);
+  const params = useSearchParams();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
     if (params.get("intent") === "collaboration") setRequest(collaborationRequest);
-  }, []);
+  }, [params]);
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -96,6 +97,7 @@ function RequestMenu({
   const rootRef = useRef<HTMLDivElement>(null);
   const labelId = useId();
   const listId = useId();
+  const errorId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -125,7 +127,7 @@ function RequestMenu({
           aria-expanded={open}
           aria-controls={listId}
           aria-labelledby={labelId}
-          aria-invalid={invalid}
+          aria-describedby={invalid ? errorId : undefined}
           onClick={() => setOpen((current) => !current)}
           className={`flex h-12 w-full items-center justify-between gap-3 rounded-full border bg-canvas px-4 text-left text-[0.95rem] font-normal ${
             invalid ? "border-accent" : "border-line-strong"
@@ -134,7 +136,11 @@ function RequestMenu({
           <span className={`truncate ${value ? "text-ink" : "text-ink-muted"}`}>{value || "Choose one"}</span>
           <Chevron open={open} />
         </button>
-        {invalid ? <p className="mt-2 px-4 text-[0.8rem] text-accent">Choose what you need.</p> : null}
+        {invalid ? (
+          <p id={errorId} className="mt-2 px-4 text-[0.8rem] text-accent">
+            Choose what you need.
+          </p>
+        ) : null}
         {open ? (
           <div
             id={listId}

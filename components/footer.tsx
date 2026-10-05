@@ -13,10 +13,10 @@ export function Footer() {
               A web and mobile team for client orders across industries.
             </p>
             <div className="mt-6">
-              <a href="/#contact" className="btn btn-primary border-white bg-white text-[#14161a] hover:bg-white/90">
+              <Link href="/#contact" className="btn btn-primary border-white bg-white text-[#14161a] hover:bg-white/90">
                 Contact us
                 <Arrow />
-              </a>
+              </Link>
             </div>
             <div className="mt-6 flex flex-col gap-1.5 text-[0.9rem]">
               <a

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
 import { RevealTitle } from "@/components/reveal-title";
 import { Rise } from "@/components/rise";
 import { SubmitForm } from "@/components/submit-form";
@@ -148,9 +150,9 @@ export default function HomePage() {
                 If money is tight and you want to earn, contact us. This is separate from hiring us to build a product.
               </p>
             </Rise>
-            <a href="/?intent=collaboration#contact" className="btn btn-primary mt-8">
+            <Link href="/?intent=collaboration#contact" className="btn btn-primary mt-8">
               Contact us
-            </a>
+            </Link>
           </div>
           <Rise className="relative aspect-[16/10] overflow-hidden rounded-[2rem]">
             <Image
@@ -202,7 +204,9 @@ export default function HomePage() {
               </p>
             </Rise>
           </div>
-          <SubmitForm />
+          <Suspense fallback={null}>
+            <SubmitForm />
+          </Suspense>
         </div>
       </section>
     </>

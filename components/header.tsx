@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Logo } from "@/components/logo";
@@ -74,9 +75,9 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <a href="/#contact" onClick={(event) => onSectionClick(event, "/#contact")} className="btn btn-primary btn-compact hidden sm:inline-flex">
+          <Link href="/#contact" onClick={(event) => onSectionClick(event, "/#contact")} className="btn btn-primary btn-compact hidden sm:inline-flex">
             Contact us
-          </a>
+          </Link>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line-strong bg-surface xl:hidden"
@@ -105,9 +106,9 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <a href="/#contact" className="btn btn-primary mt-2 mb-3" onClick={(event) => onSectionClick(event, "/#contact")}>
+            <Link href="/#contact" className="btn btn-primary mt-2 mb-3" onClick={(event) => onSectionClick(event, "/#contact")}>
               Contact us
-            </a>
+            </Link>
           </div>
         </nav>
       ) : null}
