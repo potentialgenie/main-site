@@ -354,8 +354,7 @@ export default function HomePage() {
               </p>
             </Rise>
             <ul className="mt-10 space-y-5">
-              <ContactLine label="New projects" value={site.email} />
-              <ContactLine label="Support" value={site.supportEmail} />
+              <ContactLine label="Email" value={site.email} />
             </ul>
           </div>
           <Suspense fallback={null}>

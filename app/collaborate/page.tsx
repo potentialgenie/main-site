@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Burst } from "@/components/icons";
-import { Mark } from "@/components/logo";
 import { RevealTitle } from "@/components/reveal-title";
 import { Rise } from "@/components/rise";
 
@@ -21,7 +20,6 @@ export default function CollaboratePage() {
       <div aria-hidden="true" className="absolute inset-0 bg-black/15 [clip-path:polygon(69%_0,77%_0,100%_31%,100%_47%)]" />
       <div className="container-page relative grid items-start gap-14 lg:grid-cols-[minmax(0,746px)_minmax(0,1fr)] lg:gap-6">
         <div className="relative">
-          <Mark className="relative mb-4 h-auto w-[86px] opacity-95 lg:absolute lg:-top-2 lg:left-[-53px] lg:mb-0 lg:w-[129px]" />
           <Burst className="absolute top-[389px] left-[-173px] hidden h-[200px] w-[200px] text-accent lg:block" />
           <RevealTitle as="h1" className="display relative text-white">
             We Have An Idea To Make Money Together.

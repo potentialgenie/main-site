@@ -22,12 +22,6 @@ export function Footer() {
             </a>
             <ul className="mt-[34px] text-[1rem] leading-[26px] text-[#777]">
               <li>
-                <span className="text-accent">S:</span>&nbsp;&nbsp;
-                <a href={`mailto:${site.supportEmail}`} className="transition-colors hover:text-white">
-                  {site.supportEmail}
-                </a>
-              </li>
-              <li>
                 <span className="text-accent">W:</span>&nbsp;&nbsp;makeit-real.world
               </li>
             </ul>

@@ -151,9 +151,6 @@ export function Header() {
           <a href={`mailto:${site.email}`} className="block text-white hover:text-accent">
             {site.email}
           </a>
-          <a href={`mailto:${site.supportEmail}`} className="block text-white hover:text-accent">
-            {site.supportEmail}
-          </a>
         </div>
         <Link href="/#contact" className="btn btn-primary mt-10" onClick={(event) => onSectionClick(event, "/#contact")}>
           Start A Project
