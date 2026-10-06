@@ -350,7 +350,7 @@ export default function HomePage() {
             </RevealTitle>
             <Rise>
               <p className="mt-6 text-[1rem] leading-relaxed text-ink-muted">
-                Send the product, who uses it, and whether it is web, mobile, or both. The form opens an email draft. Nothing is stored on this site until you send it.
+                Send the product, who uses it, and whether it is web, mobile, or both. The note goes to the team in Slack.
               </p>
             </Rise>
             <ul className="mt-10 space-y-5">

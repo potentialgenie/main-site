@@ -6,7 +6,8 @@ import { collaborationRequest, requestTypes, site } from "@/lib/site";
 
 export function SubmitForm() {
   const [sent, setSent] = useState(false);
-  const [draft, setDraft] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const [request, setRequest] = useState("");
   const [requestError, setRequestError] = useState(false);
   const params = useSearchParams();
@@ -15,25 +16,40 @@ export function SubmitForm() {
     if (params.get("intent") === "collaboration") setRequest(collaborationRequest);
   }, [params]);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request) {
       setRequestError(true);
       return;
     }
     const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "");
-    const email = String(data.get("email") ?? "");
-    const detail = String(data.get("detail") ?? "");
-    const body = [`Name: ${name}`, `Email: ${email}`, `Request: ${request}`, "", detail].join("\n");
-    const href = `mailto:${site.email}?subject=${encodeURIComponent(`Request from ${name}`)}&body=${encodeURIComponent(body)}`;
-    setDraft(href);
-    setSent(true);
-    window.location.href = href;
+    setSending(true);
+    setSendError(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(data.get("name") ?? ""),
+          email: String(data.get("email") ?? ""),
+          request,
+          detail: String(data.get("detail") ?? ""),
+        }),
+      });
+      if (!response.ok) {
+        setSendError(true);
+        return;
+      }
+      setSent(true);
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
-    return <DraftReady draft={draft} />;
+    return <SentNote />;
   }
 
   return (
@@ -60,8 +76,13 @@ export function SubmitForm() {
           className="mt-2 w-full resize-y rounded-xl border border-line-strong bg-canvas px-4 py-3 outline-none transition-colors focus:border-accent text-[0.95rem] font-normal leading-relaxed"
         />
       </label>
-      <button type="submit" className="btn btn-primary mt-6">
-        Send
+      {sendError ? (
+        <p className="mt-5 text-[0.9rem] leading-relaxed text-accent" role="alert">
+          The note could not be sent. Email {site.email} instead.
+        </p>
+      ) : null}
+      <button type="submit" className="btn btn-primary mt-6" disabled={sending}>
+        {sending ? "Sending" : "Send"}
       </button>
       <p className="mt-4 text-[0.825rem] leading-relaxed text-ink-muted">
         Or email us directly at {site.email}
@@ -70,16 +91,13 @@ export function SubmitForm() {
   );
 }
 
-function DraftReady({ draft }: { draft: string }) {
+function SentNote() {
   return (
     <div className="rounded-[1.5rem] border border-line bg-card p-7 shadow-raised sm:p-10">
-      <h3 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h3>
+      <h3 className="text-xl font-semibold tracking-[-0.02em]">Your note was sent.</h3>
       <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
-        If your mail app did not open, use the link below. Nothing is stored on this site until you send the message.
+        The team has it in Slack. You can also write to {site.email}.
       </p>
-      <a href={draft} className="btn btn-primary mt-6">
-        Open the draft again
-      </a>
     </div>
   );
 }

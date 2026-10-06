@@ -66,10 +66,7 @@ export function TechnologyBoard() {
                   open ? "" : "lg:translate-y-6 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100"
                 }`}
               >
-                <span>
-                  <span className="block text-[0.9rem] text-ink-muted">Practice {group.code}</span>
-                  <span className="font-display mt-1 block text-[1.35rem] leading-snug font-bold text-ink">{group.name}</span>
-                </span>
+                <span className="font-display block text-[1.35rem] leading-snug font-bold text-ink">{group.name}</span>
                 <span className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-white transition-transform duration-300 ${open ? "rotate-45" : ""}`}>
                   <Plus />
                 </span>
@@ -82,8 +79,7 @@ export function TechnologyBoard() {
         <div id={selected.id} className="panel-in mt-8 scroll-mt-32 overflow-hidden rounded-[1.5rem] border border-line border-t-4 border-t-accent bg-card px-6 py-9 sm:px-10">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <p className="eyebrow">Practice {selected.code}</p>
-              <h3 className="mt-3 text-[2rem] font-bold">{selected.name}</h3>
+              <h3 className="text-[2rem] font-bold">{selected.name}</h3>
               <p className="mt-3 max-w-[62ch] text-[0.98rem] leading-relaxed text-ink-muted">{selected.summary}</p>
             </div>
             <button
