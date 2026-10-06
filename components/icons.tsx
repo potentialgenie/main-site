@@ -30,14 +30,3 @@ export function Burst({ className = "h-28 w-28" }: { className?: string }) {
     </svg>
   );
 }
-
-// Red folded stripes that slide into a card corner on hover.
-export function Ribbon({ className = "card-ribbon" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 120" className={className} aria-hidden="true">
-      <path d="M0 40h28l80 80H52Z" fill="#df2919" />
-      <path d="M28 40h22l70 70v10h-12Z" fill="#b81f12" />
-      <path d="M60 40h14l46 46v18Z" fill="#df2919" opacity="0.85" />
-    </svg>
-  );
-}

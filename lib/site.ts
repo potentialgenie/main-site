@@ -1,8 +1,8 @@
 export const site = {
   name: "Make It Real",
-  title: "Make It Real",
+  title: "Make It Real — Design and build software",
   description:
-    "Make It Real is a web and mobile development team. Clients hire us to design and build products across industries.",
+    "Make It Real designs and builds websites, web apps, mobile products, stores, and AI features. One team takes the work from the first note to launch.",
   email: "hello@makeit-real.world",
   supportEmail: "support@makeit-real.world",
   url: "https://makeit-real.world",
@@ -10,8 +10,7 @@ export const site = {
 
 export const nav = [
   { href: "/#about", label: "About Us" },
-  { href: "/#help", label: "Services" },
-  { href: "/#technologies", label: "Work" },
+  { href: "/#technologies", label: "Services" },
   { href: "/#process", label: "Process" },
   { href: "/#contact", label: "Contact" },
 ] as const;
@@ -19,21 +18,11 @@ export const nav = [
 // The side panel lists every section, including the ones left out of the header bar.
 export const sideNav = [
   { href: "/#about", label: "About Us" },
-  { href: "/#help", label: "Services" },
-  { href: "/#technologies", label: "Work" },
+  { href: "/#technologies", label: "Services" },
   { href: "/#industries", label: "Industries" },
-  { href: "/#access", label: "Collaborate" },
   { href: "/#process", label: "Process" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },
-] as const;
-
-// Short two-row link block in the header, in the place the reference uses for social links.
-export const quickLinks = [
-  { href: "/#web-mobile-development", label: "Web." },
-  { href: "/#ui-ux-design", label: "UX." },
-  { href: "/#ai-apps", label: "AI." },
-  { href: "/#ecommerce-development", label: "Shop." },
 ] as const;
 
 export const footerColumns = [
@@ -50,9 +39,8 @@ export const footerColumns = [
     title: "Top Links",
     links: [
       { href: "/#about", label: "About" },
-      { href: "/#help", label: "Services" },
+      { href: "/#technologies", label: "Services" },
       { href: "/#industries", label: "Industries" },
-      { href: "/#access", label: "Collaborate" },
       { href: "/#faq", label: "FAQ" },
       { href: "/#contact", label: "Contact Us" },
     ],
@@ -64,7 +52,7 @@ export const footerColumns = [
       { href: "/#ui-ux-design", label: "UI UX Design" },
       { href: "/#ecommerce-development", label: "Ecommerce" },
       { href: "/#ai-apps", label: "AI Apps" },
-      { href: "/#team", label: "Team Member" },
+      { href: "/#team", label: "Specialists" },
     ],
   },
 ] as const;
@@ -124,7 +112,7 @@ export const technologyGroups = [
   {
     id: "web-mobile-development",
     code: "01",
-    image: "/images/web.jpg",
+    image: "/images/web-image.webp",
     name: "Web & Mobile Development",
     summary: "Sites and apps in one practice, from the screens people use to the data behind them.",
     specialties: [
@@ -133,13 +121,12 @@ export const technologyGroups = [
       { name: "Full Stack Development", body: "One team for the interface, the API, and the database.", stack: ["TypeScript", "Node.js", "PostgreSQL", "Next.js"] },
       { name: "CMS Development", body: "A site you can edit without calling a developer for every change.", stack: ["WordPress", "Webflow", "Headless CMS"] },
       { name: "Mobile App Development", body: "iPhone, iPad, and Android products, native or from one shared codebase.", stack: ["Swift", "Kotlin", "Flutter", "React Native"] },
-      { name: "Mobile Game Development", body: "A game for a phone, rather than a business app.", stack: ["Unity", "Flutter", "Native mobile"] },
     ],
   },
   {
     id: "ui-ux-design",
     code: "02",
-    image: "/images/design.jpg",
+    image: "/images/design-image.webp",
     name: "UI UX Design",
     summary: "Design alongside the build, so the product has a shape before the code.",
     specialties: [
@@ -152,7 +139,7 @@ export const technologyGroups = [
   {
     id: "ecommerce-development",
     code: "03",
-    image: "/images/ecommerce.jpg",
+    image: "/images/ecommerce-image.webp",
     name: "Ecommerce Development",
     summary: "A store needs a catalog, a checkout, and accounts. We build that with WooCommerce, Magento, Medusa, or a custom checkout.",
     specialties: [
@@ -185,7 +172,7 @@ export const technologyGroups = [
   {
     id: "scripts-automation",
     code: "05",
-    image: "/images/automation.jpg",
+    image: "/images/automation-image.webp",
     name: "Scripts & Automation",
     summary: "Automations and scripts when a full product is more than the job needs, using Make, n8n, Zapier, and custom scripts.",
     specialties: [
@@ -199,7 +186,7 @@ export const technologyGroups = [
   {
     id: "desktop",
     code: "06",
-    image: "/images/desktop.jpg",
+    image: "/images/desktop-image.webp",
     name: "Desktop Application Development",
     summary: "Software that runs on a computer, not in a browser or an app store, built with Electron, Tauri, .NET, Qt, and others.",
     specialties: [
@@ -210,42 +197,23 @@ export const technologyGroups = [
       },
     ],
   },
-  {
-    id: "games",
-    code: "07",
-    image: "/images/game-development.png",
-    name: "Game Design & Development",
-    summary: "A game designed and built as its own product, with Unity, Unreal Engine, Godot, and the tools around them.",
-    specialties: [
-      {
-        name: "Video Game Development",
-        body: "The game itself, plus the interface and art around it, for desktop, mobile, or the web.",
-        stack: ["Unity", "Unreal Engine", "Godot", "C#", "C++", "Blender", "Phaser", "Flutter"],
-      },
-    ],
-  },
 ] as const;
 
 export const clientStages = [
   {
     step: "01",
-    title: "Send the order",
-    body: "Tell us the product, who uses it, and the industry. A finished specification is not required. The form at the bottom is enough to start.",
+    title: "Discover & plan",
+    body: "Workshops with your team to map users, goals and constraints. You leave with a scoped roadmap and a fixed quote.",
   },
   {
     step: "02",
-    title: "We assign the team",
-    body: "We match that note to the specialties further down: web and mobile, a store, UI UX, AI, automation, desktop, or a game.",
+    title: "Design & prototype",
+    body: "Clickable prototypes tested with real users, plus a design system your engineers will enjoy using.",
   },
   {
     step: "03",
-    title: "We agree the scope",
-    body: "Together we write what will be built, what will not, and how the work is paid. Nothing starts before both sides accept that.",
-  },
-  {
-    step: "04",
-    title: "We build and hand it over",
-    body: "We ship the agreed release and leave you with a product you can run, plus the notes you need to keep it going.",
+    title: "Build, launch & grow",
+    body: "Two-week sprints, weekly demos and production releases from the very first sprint — then we measure and iterate.",
   },
 ] as const;
 
@@ -285,7 +253,6 @@ export const requestTypes = [
       "Native iOS application",
       "Native Android application",
       "Cross-platform application in Flutter or React Native",
-      "Mobile game",
     ],
   },
   {
@@ -303,7 +270,6 @@ export const requestTypes = [
       "AI assistant or model integration inside a product",
       "Script or internal automation",
       "Desktop application",
-      "Video game",
     ],
   },
   {
@@ -326,7 +292,7 @@ export const promises = [
   {
     title: "One Team, Whole Build",
     tag: "During the build",
-    image: "/images/web.jpg",
+    image: "/images/web.webp",
     body: "Design, front end, back end, and mobile stay in one order, so you never coordinate three separate vendors.",
   },
   {
@@ -345,10 +311,9 @@ export const promises = [
 
 // Shown in the team-style cards: the specialist roles inside the team, not named people.
 export const specialists = [
-  { role: "Front-End Developers", stack: "React · Next.js · Vue", image: "/images/web.jpg" },
-  { role: "Mobile Developers", stack: "Swift · Kotlin · Flutter", image: "/images/mobile.jpg" },
-  { role: "UI UX Designers", stack: "Figma · Prototypes", image: "/images/design.jpg" },
-  { role: "AI Engineers", stack: "OpenAI · Anthropic · RAG", image: "/images/AI.jpg" },
-  { role: "Automation Engineers", stack: "Make · n8n · Python", image: "/images/automation.jpg" },
-  { role: "Game Developers", stack: "Unity · Unreal · Godot", image: "/images/game-development.png" },
+  { role: "Front-End Developers", stack: "React · Next.js · Vue", image: "/images/frontend_developer.webp" },
+  { role: "Backend Developers", stack: "Node.js · Python · PHP", image: "/images/backend_developer.webp" },
+  { role: "UI UX Designers", stack: "Figma · Prototypes", image: "/images/ui_ux_designer.webp" },
+  { role: "AI Engineers", stack: "OpenAI · Anthropic · RAG", image: "/images/ai_engineer.webp" },
+  { role: "Automation Engineers", stack: "Make · n8n · Python", image: "/images/automation_engineer.webp" },
 ] as const;

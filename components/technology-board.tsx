@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Carousel } from "@/components/carousel";
 import { Plus } from "@/components/icons";
 import { technologyGroups } from "@/lib/site";
 
@@ -9,18 +10,8 @@ function motion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 }
 
-const filters = [
-  { label: "View All", ids: null },
-  { label: "Development", ids: ["web-mobile-development", "desktop"] },
-  { label: "UI UX Design", ids: ["ui-ux-design"] },
-  { label: "Ecommerce", ids: ["ecommerce-development"] },
-  { label: "AI & Automation", ids: ["ai-apps", "scripts-automation"] },
-  { label: "Games", ids: ["games"] },
-] as const;
-
 export function TechnologyBoard() {
   const [active, setActive] = useState<string | null>(null);
-  const [filter, setFilter] = useState(0);
 
   useEffect(() => {
     const sync = () => {
@@ -33,7 +24,6 @@ export function TechnologyBoard() {
             : raw;
       const known = technologyGroups.some((group) => group.id === id);
       setActive(known ? id : null);
-      if (known) setFilter(0);
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -54,28 +44,10 @@ export function TechnologyBoard() {
     document.getElementById(active)?.scrollIntoView({ block: "nearest", behavior: motion() });
   }, [active]);
 
-  const allowed = filters[filter].ids as readonly string[] | null;
-  const visible = technologyGroups.filter((group) => !allowed || allowed.includes(group.id));
-
   return (
     <div>
-      <div className="flex flex-wrap justify-center gap-3" role="group" aria-label="Filter practices">
-        {filters.map((item, index) => (
-          <button
-            key={item.label}
-            type="button"
-            aria-pressed={filter === index}
-            onClick={() => setFilter(index)}
-            className={`border px-4 py-2 text-[1rem] transition-colors ${
-              filter === index ? "border-accent bg-accent font-medium text-white" : "border-line text-ink-muted hover:border-accent hover:bg-accent hover:text-white"
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-      <div className="mt-16 grid gap-[1.875rem] md:grid-cols-2">
-        {visible.map((group, index) => {
+      <Carousel label="What we build" itemClassName="w-[88%] lg:w-[calc((100%-3.75rem)/3)]">
+        {technologyGroups.map((group) => {
           const open = group.id === active;
           return (
             <button
@@ -84,10 +56,11 @@ export function TechnologyBoard() {
               aria-expanded={open}
               aria-controls={group.id}
               onClick={() => choose(group.id)}
-              className={`group relative block aspect-[7/5] overflow-hidden text-left ${visible.length % 2 && index === 0 ? "md:col-span-2 md:aspect-[14/5]" : ""} ${open ? "outline-2 outline-offset-4 outline-accent" : ""}`}
+              className={`group relative block w-full overflow-hidden text-left ${open ? "outline-2 outline-offset-4 outline-accent" : ""}`}
+              style={{ aspectRatio: "4 / 5" }}
             >
-              <Image src={group.image} alt="" fill sizes="(min-width: 768px) 620px, 100vw" className="photo-mono object-cover" />
-              <span className="absolute inset-0 bg-[#131313]/25 transition-colors duration-500 group-hover:bg-transparent" />
+              <Image src={group.image} alt="" fill sizes="(min-width: 1024px) 33vw, 88vw" className="photo-mono object-cover" />
+              <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/45 transition-colors duration-500 group-hover:bg-[#131313]/20" />
               <span
                 className={`absolute bottom-6 left-6 flex max-w-[calc(100%-3rem)] items-center gap-6 bg-canvas py-5 pr-5 pl-6 transition-all duration-500 ${
                   open ? "" : "lg:translate-y-6 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-visible:translate-y-0 lg:group-focus-visible:opacity-100"
@@ -104,7 +77,7 @@ export function TechnologyBoard() {
             </button>
           );
         })}
-      </div>
+      </Carousel>
       {selected ? (
         <div id={selected.id} className="panel-in mt-8 scroll-mt-32 border border-line border-t-4 border-t-accent bg-card px-6 py-9 sm:px-10">
           <div className="flex items-start justify-between gap-6">

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowUpRight } from "@/components/icons";
 import { Logo } from "@/components/logo";
-import { nav, quickLinks, sideNav, site } from "@/lib/site";
+import { nav, sideNav, site } from "@/lib/site";
 
 function scrollToSection(id: string) {
   const target = document.getElementById(id);
@@ -70,12 +70,12 @@ export function Header() {
           : "absolute inset-x-0 top-0 z-50 pt-[25px]"
       }
     >
-      <div className="px-5 xl:px-3 min-[100rem]:px-[110px]">
+      <div className="container-page">
         <div className={scrolled ? "" : "border-b border-line pb-5"}>
           <div className={`flex items-center justify-between gap-6 ${scrolled ? "h-[61px]" : "h-[60px]"}`}>
             <div className="flex items-center">
               <Logo className="h-8 w-auto sm:h-[34px]" />
-              <nav className="ml-[49px] hidden shrink-0 items-center gap-[29px] xl:flex" aria-label="Primary">
+              <nav className="ml-8 hidden shrink-0 items-center gap-6 xl:ml-[49px] xl:gap-[29px] lg:flex" aria-label="Primary">
                 {nav.map((item) => (
                   <a
                     key={item.href}
@@ -89,27 +89,10 @@ export function Header() {
               </nav>
             </div>
             <div className="flex shrink-0 items-center">
-              <ul className="hidden grid-cols-[auto_auto] gap-x-2.5 gap-y-[5px] text-[1rem] leading-[21px] font-bold text-ink-muted lg:grid">
-                {quickLinks.map((link) => (
-                  <li key={link.href}>
-                    <a href={link.href} className="transition-colors hover:text-accent">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <p className="ml-[60px] hidden text-[1rem] leading-[26px] font-bold whitespace-nowrap text-white min-[87.5rem]:block">
-                Best Solution For Business
-                <span className="block">Software Development</span>
-              </p>
-              <p className="ml-[30px] hidden text-[1rem] leading-[26px] font-bold whitespace-nowrap text-white lg:block">
-                <a href={`mailto:${site.email}`} className="block hover:text-accent">
-                  E: {site.email}
-                </a>
-                <a href={`mailto:${site.supportEmail}`} className="block hover:text-accent">
-                  S: {site.supportEmail}
-                </a>
-              </p>
+              <a href="/#contact" onClick={(event) => onSectionClick(event, "/#contact")} className="btn btn-primary btn-compact hidden sm:inline-flex">
+                Contact Us
+                <ArrowUpRight />
+              </a>
               <button
                 type="button"
                 className="ml-[34px] inline-flex h-[31px] w-[31px] items-center justify-center text-ink-muted transition-colors hover:text-white"
@@ -164,7 +147,7 @@ export function Header() {
           ))}
         </nav>
         <div className="mt-10 space-y-3 text-[0.95rem]">
-          <p className="font-display text-[0.85rem] font-semibold tracking-[0.3em] text-ink-muted uppercase">Get Contact</p>
+          <p className="font-display text-[0.85rem] font-semibold tracking-[0.3em] text-ink-muted uppercase">Contact</p>
           <a href={`mailto:${site.email}`} className="block text-white hover:text-accent">
             {site.email}
           </a>

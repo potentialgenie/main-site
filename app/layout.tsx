@@ -15,6 +15,18 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  openGraph: {
+    title: site.title,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

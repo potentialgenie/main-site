@@ -7,16 +7,16 @@ export function Footer() {
     <footer className="text-white">
       <div className="relative overflow-hidden bg-[#181818] pt-[120px] pb-[90px]">
         <FooterArt />
-        <div className="container-page relative grid gap-12 sm:grid-cols-3 lg:grid-cols-[526fr_196fr_196fr_196fr] lg:gap-x-[4.65%] xl:px-3">
+        <div className="container-page relative grid gap-12 sm:grid-cols-3 lg:grid-cols-[526fr_196fr_196fr_196fr] lg:gap-x-[4.65%]">
           <div className="sm:col-span-3 lg:col-span-1">
             <Logo className="h-[42px] w-auto" />
-            <h2 className="font-display mt-[100px] pt-[12px] text-[14px] leading-[62px] font-bold tracking-[4.2px] text-ink-muted uppercase">Get Contact</h2>
+            <h2 className="font-display mt-[100px] pt-[12px] text-[14px] leading-[62px] font-bold tracking-[4.2px] text-ink-muted uppercase">Contact</h2>
             <a href={`mailto:${site.email}`} className="group mt-0 flex max-w-[420px] items-center sm:max-w-none lg:max-w-[440px] gap-6 border-b border-[#333] pr-2 pb-3 pl-[15px]">
               <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] shrink-0 text-white" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <path d="m4 7 8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="font-display text-[1.25rem] leading-[48px] font-bold break-all text-[#3c3c3c] transition-colors group-hover:text-white sm:text-[1.75rem] sm:break-normal">
+              <span className="font-display text-[1.25rem] leading-[48px] font-bold break-all text-[#e8e8e8] transition-colors group-hover:text-white sm:text-[1.75rem] sm:break-normal">
                 {site.email}
               </span>
             </a>
@@ -57,11 +57,11 @@ export function Footer() {
         </div>
       </div>
       <div className="bg-[#1a1a1a] py-[30px]">
-        <div className="container-page flex items-center justify-between gap-6 xl:px-3">
+        <div className="container-page flex items-center justify-between gap-6">
           <p className="text-[1rem] leading-[26px]">
             Copyright © {new Date().getFullYear()} <span className="text-accent">{site.name}</span>. All rights reserved.
           </p>
-          <Mark className="h-8 w-auto opacity-25 grayscale" />
+          <Mark className="h-8 w-auto" />
         </div>
       </div>
     </footer>
@@ -77,7 +77,6 @@ function FooterArt() {
       <div className="absolute inset-0 bg-[#1d1d1d] [clip-path:polygon(60.9%_3%,68.3%_3%,85.1%_51.8%,85.1%_75.3%)]" />
       <div className="absolute inset-0 bg-[#1d1d1d] [clip-path:polygon(86.8%_68.7%,97.4%_100%,92%_100%,86.8%_85.8%)]" />
       <div className="dot-grid-sm absolute top-[9%] hidden lg:block left-[85.4%] h-[11.6%] w-[8.4%] text-white/35" />
-      <div className="dot-grid-sm absolute top-[59.3%] hidden lg:block left-[4.4%] h-[11.6%] w-[8.4%] text-white/35" />
     </div>
   );
 }

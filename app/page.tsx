@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense, type ReactNode } from "react";
 import { HashLink } from "@/components/hash-link";
 import { ArrowUpRight, Burst, Plus } from "@/components/icons";
@@ -7,78 +6,68 @@ import { Mark } from "@/components/logo";
 import { RevealTitle } from "@/components/reveal-title";
 import { Rise } from "@/components/rise";
 import { Carousel } from "@/components/carousel";
-import { ServiceSlider } from "@/components/service-slider";
 import { SubmitForm } from "@/components/submit-form";
 import { TechnologyBoard } from "@/components/technology-board";
 import { clientStages, faqs, industries, promises, site, specialists, technologyGroups } from "@/lib/site";
 
-const stack = ["React", "Next.js", "Flutter", "Node.js", "Figma", "OpenAI"];
+const marquee = ["Web Apps", "Mobile Apps", "UI UX Design", "Ecommerce", "AI Integration", "Automation", "Desktop"];
 
-const marquee = ["Web Apps", "Mobile Apps", "UI UX Design", "Ecommerce", "AI Integration", "Automation", "Desktop", "Games"];
+const orderPoints = [
+  { label: "One team", body: "Design, front end, back end, and mobile stay on the same order." },
+  { label: "Scope first", body: "What will be built, and how it is paid, is written down before code." },
+  { label: "Web and mobile", body: "Websites, apps, stores, and AI features, built as a product you can run." },
+  { label: "A note is enough", body: "Tell us the product and who uses it. A finished specification is not required." },
+];
 
 const stageMeta = [
-  { label: "Start", image: "/images/design.jpg" },
-  { label: "Team", image: "/images/web.jpg" },
-  { label: "Scope", image: "/images/handshake.jpg" },
-  { label: "Launch", image: "/images/desktop.jpg" },
+  { label: "Discover", image: "/images/handshake.jpg" },
+  { label: "Design", image: "/images/design.jpg" },
+  { label: "Build", image: "/images/desktop.jpg" },
 ];
 
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-canvas pt-[6.625rem] xl:h-[69.25rem] xl:pt-0">
-        <div aria-hidden="true" className="hero-grid absolute inset-0" />
-        <div aria-hidden="true" className="hero-shape absolute inset-0 hidden [clip-path:polygon(41.6%_0,66%_0,100%_38%,100%_63%)] xl:block" />
-        <div aria-hidden="true" className="dot-grid absolute top-[194px] left-[calc(72.94vw-652px)] hidden h-[73px] w-[157px] text-ink/15 xl:block" />
-        <div aria-hidden="true" className="dot-grid absolute top-[549px] left-[calc(11.9vw-81px)] hidden h-[73px] w-[157px] text-ink/15 xl:block" />
-        <span aria-hidden="true" className="float-y absolute top-[436px] left-[calc(11.9vw-21px)] z-20 hidden h-[47px] w-[47px] rounded-full bg-[#1fd47a] xl:block" />
-
-        <div className="container-page relative z-20 pt-14 xl:px-3 xl:pt-[12.5rem]">
-          <RevealTitle as="h1" className="display max-w-[9.6em]" mark="real">
+      <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-[#131313] pt-28 pb-16 text-white">
+        <Image src="/images/hero-image.webp" alt="" fill priority sizes="100vw" className="object-cover object-center" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(19_19_19/0.92)_0%,rgb(19_19_19/0.84)_45%,rgb(19_19_19/0.9)_100%)] lg:bg-[linear-gradient(90deg,rgb(19_19_19/0.94)_0%,rgb(19_19_19/0.84)_28%,rgb(19_19_19/0.66)_58%,rgb(19_19_19/0.56)_100%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/20 [clip-path:polygon(40.5%_0,57.5%_0,100%_58%,100%_88%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/25 [clip-path:polygon(57.5%_0,69%_0,94%_60%,94%_100%,86%_100%,100%_88%,100%_58%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/15 [clip-path:polygon(69%_0,77%_0,100%_31%,100%_47%)]" />
+        <div className="container-page relative">
+          <RevealTitle as="h1" className="display max-w-[9.6em] text-white" mark="real">
             We make your ideas real.
           </RevealTitle>
-          <div className="relative mt-6 max-w-[46.6rem] xl:pl-[6.25rem]">
-            <Rise delay={160}>
-              <p className="relative text-[1rem] leading-[1.625rem] text-ink-muted">
-                Make It Real designs and builds websites, web apps, mobile products, stores, and AI features. One team takes your order from the first note to launch.
-              </p>
-            </Rise>
-            <Rise delay={260}>
-              <div className="mt-8 flex items-center gap-[1.9rem]">
-                <span aria-hidden="true" className="h-px w-24 bg-accent sm:w-[16.1rem]" />
-                <HashLink href="#contact" className="group font-display inline-flex items-center gap-3 text-[1rem] font-semibold text-ink">
-                  Discover Now
-                  <ArrowUpRight className="h-3.5 w-3.5 text-accent" />
-                </HashLink>
+          <Rise delay={160}>
+            <p className="relative mt-6 max-w-[40rem] text-[1rem] leading-[1.625rem] text-ink-muted">
+              Make It Real designs and builds websites, web apps, mobile products, stores, and AI features. One team takes your order from the first note to launch.
+            </p>
+          </Rise>
+          <Rise delay={260}>
+            <HashLink href="#contact" className="btn btn-primary mt-8 h-[62px]">
+              Start a project
+              <ArrowUpRight />
+            </HashLink>
+          </Rise>
+        </div>
+      </section>
+
+      {/* How an order works, in brief */}
+      <section aria-label="How an order works" className="bg-canvas py-20 lg:py-24">
+        <div className="container-page grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {orderPoints.map((item, index) => (
+            <Rise key={item.label} delay={index * 90}>
+              <div className="flex items-center gap-4">
+                <span className="font-display relative inline-flex h-12 w-12 shrink-0 items-center justify-center text-[1.2rem] font-semibold">
+                  <span aria-hidden="true" className="absolute inset-0 -rotate-45 rounded-full border-2 border-line border-t-accent border-l-accent" />
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h2 className="font-display text-[1.35rem] leading-tight font-bold">{item.label}</h2>
               </div>
+              <p className="mt-4 text-[1rem] leading-relaxed text-ink-muted">{item.body}</p>
             </Rise>
-          </div>
-        </div>
-
-        <HeroArt />
-      </section>
-
-      {/* Tool strip */}
-      <section aria-label="Tools we build with" className="bg-canvas">
-        <div className="container-page grid grid-cols-2 items-center gap-y-8 py-20 sm:grid-cols-3 lg:grid-cols-6">
-          {stack.map((name) => (
-            <span key={name} className="font-display text-center text-[2.1rem] font-extrabold tracking-[-0.04em] text-ghost transition-colors hover:text-ink-muted">
-              {name}
-            </span>
           ))}
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="help" className="scroll-mt-24 bg-canvas pt-12 pb-28">
-        <div className="container-page">
-          <CenterHead title="Our Best Services">
-            An order is a site or app, a store, or the design and AI around them. Each card opens the specialties and tools inside that practice.
-          </CenterHead>
-          <div className="mt-14">
-            <ServiceSlider />
-          </div>
         </div>
       </section>
 
@@ -86,15 +75,17 @@ export default function HomePage() {
       <section id="about" className="relative scroll-mt-24 overflow-hidden bg-raised py-30">
         <Scribbles />
         <div aria-hidden="true" className="absolute -top-40 right-[-10%] h-[44rem] w-[44rem] rounded-full border-[7rem] border-ink/[0.025]" />
-        <div className="container-page relative grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
-          <Rise className="relative mx-auto aspect-[550/610] w-full max-w-[34rem]">
+        <div className="container-page relative grid items-center gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.85fr)] lg:gap-16">
+          <Rise className="relative aspect-[550/610] w-full max-w-[46rem] lg:max-w-none">
             <div aria-hidden="true" className="absolute right-[2%] bottom-[18%] h-[46%] w-[46%] rounded-full bg-accent/20" />
             <div className="absolute top-0 left-0 h-[72%] w-[75.6%] overflow-hidden">
-              <Image src="/images/about-1.webp" alt="The team working together around a table" fill sizes="420px" className="object-cover object-[45%_center] grayscale" />
+              <Image src="/images/about-1.webp" alt="The team working together around a table" fill sizes="(min-width: 1024px) 560px, 80vw" className="object-cover object-[45%_center]" />
+              <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
             </div>
             <div aria-hidden="true" className="dot-grid absolute top-[16%] -right-[2%] h-20 w-32 text-ink/20" />
             <div className="absolute right-0 bottom-0 h-[72%] w-[60%] overflow-hidden">
-              <Image src="/images/about-2.webp" alt="The team celebrating with a high five" fill sizes="330px" className="object-cover object-[35%_center] grayscale" />
+              <Image src="/images/about-2.webp" alt="The team celebrating with a high five" fill sizes="(min-width: 1024px) 440px, 70vw" className="object-cover object-[35%_center]" />
+              <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
             </div>
             <div className="absolute bottom-0 left-0 flex h-[28%] w-[40%] items-center justify-center bg-raised">
               <Burst className="h-[78%] w-auto text-accent" />
@@ -122,13 +113,14 @@ export default function HomePage() {
               </AboutPoint>
             </div>
             <Rise delay={150}>
-              <div className="mt-10 flex items-center gap-5">
+              <div className="mt-10 flex flex-wrap items-center gap-5">
                 <HashLink href="#process" className="btn btn-outline">
                   How We Work
                   <ArrowUpRight />
                 </HashLink>
-                <HashLink href="#contact" className="btn-square" aria-label="Start a project">
-                  <PlayIcon />
+                <HashLink href="#contact" className="btn btn-primary">
+                  Start a project
+                  <ArrowUpRight />
                 </HashLink>
               </div>
             </Rise>
@@ -140,7 +132,7 @@ export default function HomePage() {
       <section id="technologies" className="scroll-mt-24 bg-canvas py-28">
         <div className="container-page">
           <CenterHead title="What We Build">
-            Seven practices, one team. Filter by type, then open a practice to see the specialties and tools inside it.
+            {technologyGroups.length} practices, one team. Open a practice to see the specialties and tools inside it.
           </CenterHead>
           <div className="mt-12">
             <TechnologyBoard />
@@ -148,7 +140,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Marquee */}
       <div aria-hidden="true" className="marquee-band relative overflow-hidden bg-canvas py-24">
         <div className="absolute inset-x-[-5%] top-1/2 h-24 -translate-y-1/2 rotate-[2.5deg] bg-ghost/70" />
         <div className="relative -mx-[5%] -rotate-[2.5deg] bg-card py-7">
@@ -169,7 +160,7 @@ export default function HomePage() {
 
       {/* What we do */}
       <section id="industries" className="scroll-mt-24 bg-canvas py-24 lg:py-[120px]">
-        <div className="container-page grid items-center gap-16 lg:grid-cols-2 lg:gap-[54px] xl:px-3">
+        <div className="container-page grid items-center gap-16 lg:grid-cols-2 lg:gap-[54px]">
           <Rise className="relative mx-auto aspect-[677/695] w-full max-w-[636px]">
             <WhatWeDoArt />
           </Rise>
@@ -180,16 +171,12 @@ export default function HomePage() {
             </RevealTitle>
             <Rise>
               <p className="mt-6 text-[1rem] leading-[26px] text-ink-muted">
-                Healthcare, education, finance, retail, logistics, and {industries.length - 5} more industries. Portals, booking flows, stores, and internal tools: the product changes with the industry, the developers do not.
+                Portals, booking flows, stores, and internal tools. The product changes with the industry. The developers do not.
               </p>
             </Rise>
-            <div className="mt-4 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-              <SkillBar label="Scope agreed before work" value={100} />
-              <SkillBar label="Product handed over to you" value={100} />
-            </div>
             <Rise delay={120}>
               <HashLink href="#contact" className="btn btn-primary mt-10 h-[62px]">
-                Discover More
+                Start a project
                 <ArrowUpRight />
               </HashLink>
             </Rise>
@@ -197,7 +184,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Promises (testimonial layout) */}
+      {/* Promises */}
       <section id="promises" className="scroll-mt-24 bg-canvas pb-28">
         <div className="container-page">
           <CenterHead title="What Clients Can Expect?">
@@ -234,53 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Collaborate (video band layout) */}
-      <section id="access" className="relative scroll-mt-24 overflow-hidden bg-[#131313] py-24 text-white lg:py-[150px]">
-        <Image src="/images/collab-bg.webp" alt="" fill sizes="100vw" className="object-cover object-[center_35%] opacity-60 grayscale" />
-        <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgb(19_19_19/0.82)_0%,rgb(19_19_19/0.6)_30%,rgb(19_19_19/0.42)_60%,rgb(19_19_19/0.4)_100%)]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-white/[0.07] [clip-path:polygon(40.5%_0,57.5%_0,100%_58%,100%_88%)]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/30 [clip-path:polygon(57.5%_0,69%_0,94%_60%,94%_100%,86%_100%,100%_88%,100%_58%)]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-white/[0.06] [clip-path:polygon(69%_0,77%_0,100%_31%,100%_47%)]" />
-        <div className="container-page relative grid items-start gap-14 lg:grid-cols-[minmax(0,746px)_minmax(0,1fr)] lg:gap-6 xl:px-3">
-          <div className="relative">
-            <Mark className="relative mb-4 h-auto w-[86px] opacity-95 lg:absolute lg:-top-2 lg:left-[-53px] lg:mb-0 lg:w-[129px]" />
-            <Burst className="absolute top-[389px] left-[-173px] hidden h-[200px] w-[200px] text-accent lg:block" />
-            <RevealTitle as="h2" className="display relative text-white">
-              We Have An Idea To Make Money Together.
-            </RevealTitle>
-            <Rise>
-              <p className="relative mt-[30px] text-[1rem] leading-[26px] tracking-[4.8px] text-ink-muted uppercase">If money is tight and you want to earn</p>
-            </Rise>
-            <Rise delay={120}>
-              <div className="relative mt-[30px] flex items-center gap-[19px]">
-                <Link href="/?intent=collaboration#contact" className="btn btn-dark h-[62px] border border-[#131313]">
-                  Contact Us
-                  <ArrowUpRight />
-                </Link>
-                <Link
-                  href="/?intent=collaboration#contact"
-                  className="btn-square h-[61px] w-[60px] bg-[#131313]"
-                  aria-label="Start a collaboration request"
-                >
-                  <PlayIcon />
-                </Link>
-              </div>
-            </Rise>
-          </div>
-          <div className="hidden justify-center pt-10 lg:flex">
-            <div className="relative h-[406px] w-[406px] rounded-full bg-[#1a1a1a]">
-              <SpinText id="collab-badge" text="COLLABORATE • MAKE IT REAL • " className="absolute inset-[18px] text-white/75" size={15} weight={300} fit />
-              <span aria-hidden="true" className="dot-grid absolute top-[52%] left-[23%] h-[58px] w-[78px] text-white/20" />
-              <svg viewBox="0 0 100 100" className="absolute inset-[27%] text-accent" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-                <path d="M14 20 20 14 76 70 70 76Z" strokeLinejoin="round" />
-                <path d="M84 36v50H34v-6h44V36Z" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Specialists (team layout) */}
+      {/* Specialists (team layout)
       <section id="team" className="scroll-mt-24 bg-canvas py-28">
         <div className="container-page">
           <CenterHead title="Our Specialist Team">
@@ -294,6 +235,7 @@ export default function HomePage() {
                   <div className="relative px-6 pb-8">
                     <div className="relative -mt-14 aspect-[335/372] overflow-hidden">
                       <Image src={person.image} alt="" fill sizes="(min-width: 1024px) 360px, 80vw" className="photo-mono object-cover" />
+                      <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
                     </div>
                     <div className="mt-6 flex items-start justify-between gap-4">
                       <div>
@@ -315,6 +257,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA */}
       <section aria-labelledby="cta-title" className="bg-canvas pb-28">
@@ -343,7 +286,7 @@ export default function HomePage() {
       <section id="process" className="scroll-mt-24 bg-canvas py-28">
         <div className="container-page">
           <CenterHead title="How A Client Order Works">
-            Four steps from the first note to a product you can run. A finished specification is not required to start.
+            Three steps from the first workshop to a product you can run.
           </CenterHead>
           <ol className="mt-14 border-t border-line">
             {clientStages.map((stage, index) => (
@@ -354,7 +297,7 @@ export default function HomePage() {
                     <span className="block">{stage.step}</span>
                   </span>
                   <span className="relative hidden h-28 w-28 overflow-hidden rounded-full md:block">
-                    <Image src={stageMeta[index].image} alt="" fill sizes="112px" className="object-cover grayscale" />
+                    <Image src={stageMeta[index].image} alt="" fill sizes="112px" className="object-cover" />
                   </span>
                   <div>
                     <p className="text-[0.95rem] text-ink-muted">{stageMeta[index].label}</p>
@@ -401,7 +344,7 @@ export default function HomePage() {
       <section id="contact" className="scroll-mt-24 bg-canvas py-28">
         <div className="container-page grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
           <div>
-            <Eyebrow>Get Contact</Eyebrow>
+            <Eyebrow>Contact</Eyebrow>
             <RevealTitle as="h2" className="title-md mt-6">
               Tell Us The Order.
             </RevealTitle>
@@ -468,52 +411,6 @@ function AboutPoint({ number, title, children }: { number: string; title: string
   );
 }
 
-// The hero artwork is laid out on a 1920 x 1100 canvas that scales like a cover
-// background, centred, so every shape keeps its place at any screen width.
-function HeroArt() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none relative mt-10 aspect-square overflow-hidden sm:aspect-[16/10] xl:absolute xl:inset-0 xl:mt-0 xl:aspect-auto">
-      <div className="@container absolute right-[-6%] bottom-0 aspect-[1920/1100] w-[165%] xl:top-0 xl:right-auto xl:bottom-auto xl:left-1/2 xl:w-[max(100%,1934px)] xl:-translate-x-1/2">
-        {/* Red ring rising from the bottom left */}
-        <div className="absolute top-[69.45%] left-[8.125%] aspect-square w-[51.875%] rounded-full border-[length:5.104cqw] border-accent" />
-        {/* Round photo on the ring, with red play marks */}
-        <div className="absolute top-[62.2%] left-[22.1%] z-10 aspect-square w-[15.6%] overflow-hidden rounded-full">
-          <Image src="/images/hero-circle.jpg" alt="" fill sizes="300px" className="object-cover object-[62%_center] grayscale" />
-        </div>
-        <svg viewBox="0 0 60 100" className="absolute top-[63.8%] left-[18.3%] z-10 w-[3.1%]">
-          <path d="M34 0 60 26 34 52Z" fill="#df2919" />
-          <path d="M2 42 14 50 2 58Z" fill="#df2919" />
-          <path d="M14 66 30 77 14 88Z" fill="#df2919" />
-        </svg>
-        {/* Red disc */}
-        <div className="absolute top-[14.36%] left-[62.81%] aspect-square w-[24.27%] rounded-full bg-[linear-gradient(135deg,#e53524_0%,#e53524_47%,#df2919_47%,#d92616_100%)]" />
-        {/* Orange quarter */}
-        <div className="absolute top-[17.8%] left-[58.2%] aspect-square w-[4.1%] rounded-tl-full bg-accent-soft" />
-        {/* Main person behind the laptop, with the logo on the lid */}
-        <div className="absolute top-[18.2%] left-[51.3%] z-10 aspect-[1084/1075] w-[47.2%]">
-          <Image src="/images/hero-main.webp" alt="" fill priority sizes="(min-width: 1280px) 860px, 80vw" className="object-contain object-bottom grayscale contrast-[1.05]" />
-        </div>
-        <Mark className="absolute top-[86.6%] left-[71.6%] z-10 h-auto w-[8.2%] opacity-90" />
-        {/* Blue quarters on the right */}
-        <div className="absolute top-[48.2%] left-[87.8%] z-20 aspect-square w-[6.56%] rounded-tl-full bg-[#5a5cf6]" />
-        <div className="absolute top-[60%] left-[94.6%] z-20 aspect-square w-[3.44%] rounded-br-full bg-[#7fd0fb]" />
-      </div>
-      {/* Person on the far left, anchored to the screen edge like the reference */}
-      <div className="absolute bottom-0 left-[clamp(0px,calc((100vw-1440px)*0.12),60px)] z-20 hidden aspect-[1051/1012] w-[400px] xl:block">
-        <Image src="/images/hero-left.webp" alt="" fill sizes="400px" className="object-contain object-bottom grayscale" />
-      </div>
-      {/* Spinning badge, top right */}
-      <div className="absolute top-[188px] right-[44px] z-30 hidden h-[127px] w-[127px] xl:block">
-        <span className="absolute inset-[30%] rounded-full bg-[#f5c518] opacity-70 blur-md" />
-        <svg viewBox="0 0 100 100" className="absolute inset-[38%] text-[#f5c518]">
-          <path d="M30 18 82 50 30 82Z" fill="currentColor" />
-        </svg>
-        <SpinText id="hero-badge" text="CREATIVE SOFTWARE • MAKE IT REAL • " className="relative h-full w-full text-white/70" size={13} weight={400} />
-      </div>
-    </div>
-  );
-}
-
 function SpinText({
   id,
   text,
@@ -556,6 +453,23 @@ function Scribbles() {
   );
 }
 
+function QuoteIcon() {
+  return (
+    <svg viewBox="0 0 52 44" className="h-11 w-12 shrink-0" aria-hidden="true">
+      <path d="M26 2C12.7 2 2 10.6 2 21.2c0 6 3.4 11.4 8.8 14.9L8 42l10-4.6c2.5.6 5.2.9 8 .9 13.3 0 24-8.6 24-19.1S39.3 2 26 2Z" fill="#df2919" />
+      <path d="M16 26c3-1 4.5-3.6 4.5-7.4V15h-6v6h2.6c0 1.8-.9 3-2.6 3.5ZM29 26c3-1 4.5-3.6 4.5-7.4V15h-6v6h2.6c0 1.8-.9 3-2.6 3.5Z" fill="#fff" />
+    </svg>
+  );
+}
+
+function Asterisk({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={`h-7 w-7 shrink-0 ${className ?? ""}`} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function ContactLine({ label, value }: { label: string; value: string }) {
   return (
     <li>
@@ -575,31 +489,6 @@ function ContactLine({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Asterisk({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={`h-7 w-7 shrink-0 ${className ?? ""}`} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
-      <path d="M7 4.5v15l12-7.5Z" />
-    </svg>
-  );
-}
-
-function QuoteIcon() {
-  return (
-    <svg viewBox="0 0 52 44" className="h-11 w-12 shrink-0" aria-hidden="true">
-      <path d="M26 2C12.7 2 2 10.6 2 21.2c0 6 3.4 11.4 8.8 14.9L8 42l10-4.6c2.5.6 5.2.9 8 .9 13.3 0 24-8.6 24-19.1S39.3 2 26 2Z" fill="#df2919" />
-      <path d="M16 26c3-1 4.5-3.6 4.5-7.4V15h-6v6h2.6c0 1.8-.9 3-2.6 3.5ZM29 26c3-1 4.5-3.6 4.5-7.4V15h-6v6h2.6c0 1.8-.9 3-2.6 3.5Z" fill="#fff" />
-    </svg>
-  );
-}
-
 // Built on the reference's 677 x 695 artwork; every position is a share of that box.
 function WhatWeDoArt() {
   return (
@@ -612,7 +501,7 @@ function WhatWeDoArt() {
         </svg>
         <span aria-hidden="true" className="dot-grid-sm absolute top-[2%] left-[81%] h-[7%] w-[16%] text-white/20" />
         <div className="absolute bottom-0 left-[2%] aspect-[799/1445] w-[66%]">
-          <Image src="/images/about-team.webp" alt="Four members of the team" fill sizes="(min-width: 1024px) 400px, 65vw" className="object-contain object-bottom grayscale contrast-[1.05]" />
+          <Image src="/images/about-team.webp" alt="Four members of the team" fill sizes="(min-width: 1024px) 400px, 65vw" className="object-contain object-bottom brightness-[0.72]" />
         </div>
       </div>
       <svg aria-hidden="true" viewBox="0 0 677 695" className="absolute inset-0 h-full w-full">
@@ -654,15 +543,3 @@ function WhatWeDoArt() {
   );
 }
 
-function SkillBar({ label, value }: { label: string; value: number }) {
-  return (
-    <Rise>
-      <p className="font-display text-[18px] leading-[26px] font-semibold text-white">
-        {label} {value}%
-      </p>
-      <div className="relative mt-[15px] h-5 bg-[#333]">
-        <div className="skill-fill relative h-full bg-white/15" style={{ width: `${value}%` }} />
-      </div>
-    </Rise>
-  );
-}
