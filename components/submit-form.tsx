@@ -37,7 +37,7 @@ export function SubmitForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="border border-line bg-card p-7 shadow-raised sm:p-10">
+    <form onSubmit={onSubmit} className="rounded-[1.5rem] border border-line bg-card p-7 shadow-raised sm:p-10">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name" name="name" autoComplete="name" placeholder="Your name" />
         <Field label="Email" name="email" type="email" autoComplete="email" placeholder="you@company.com" />
@@ -57,7 +57,7 @@ export function SubmitForm() {
           required
           rows={6}
           placeholder="What the product is, who uses it, and the industry."
-          className="mt-2 w-full resize-y border border-line-strong bg-canvas px-4 py-3 outline-none transition-colors focus:border-accent text-[0.95rem] font-normal leading-relaxed"
+          className="mt-2 w-full resize-y rounded-xl border border-line-strong bg-canvas px-4 py-3 outline-none transition-colors focus:border-accent text-[0.95rem] font-normal leading-relaxed"
         />
       </label>
       <button type="submit" className="btn btn-primary mt-6">
@@ -72,7 +72,7 @@ export function SubmitForm() {
 
 function DraftReady({ draft }: { draft: string }) {
   return (
-    <div className="border border-line bg-card p-7 shadow-raised sm:p-10">
+    <div className="rounded-[1.5rem] border border-line bg-card p-7 shadow-raised sm:p-10">
       <h3 className="text-xl font-semibold tracking-[-0.02em]">Your note is in an email draft.</h3>
       <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
         If your mail app did not open, use the link below. Nothing is stored on this site until you send the message.
@@ -129,7 +129,7 @@ function RequestMenu({
           aria-labelledby={labelId}
           aria-describedby={invalid ? errorId : undefined}
           onClick={() => setOpen((current) => !current)}
-          className={`flex h-12 w-full items-center justify-between gap-3 border bg-canvas px-4 text-left text-[0.95rem] font-normal ${
+          className={`flex h-12 w-full items-center justify-between gap-3 rounded-xl border bg-canvas px-4 text-left text-[0.95rem] font-normal ${
             invalid ? "border-accent" : "border-line-strong"
           }`}
         >
@@ -146,7 +146,7 @@ function RequestMenu({
             id={listId}
             role="listbox"
             aria-labelledby={labelId}
-            className="absolute bottom-full left-0 z-20 mb-2 max-h-80 w-full overflow-auto border border-line bg-card p-2 shadow-raised"
+            className="absolute bottom-full left-0 z-20 mb-2 max-h-80 w-full overflow-auto rounded-2xl border border-line bg-card p-2 shadow-raised"
           >
             {requestTypes.map((group) => (
               <div key={group.label} className="py-1">
@@ -165,7 +165,7 @@ function RequestMenu({
                         onChange(item);
                         setOpen(false);
                       }}
-                      className={`block w-full px-3 py-2.5 text-left text-[0.925rem] leading-snug ${
+                      className={`block w-full rounded-xl px-3 py-2.5 text-left text-[0.925rem] leading-snug ${
                         selected ? "bg-accent text-white" : "text-ink hover:bg-accent-wash"
                       }`}
                     >
@@ -219,7 +219,7 @@ function Field({
         required
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className="mt-2 h-12 w-full border border-line-strong bg-canvas px-4 outline-none transition-colors focus:border-accent text-[0.95rem] font-normal placeholder:text-ink-faint"
+        className="mt-2 h-12 w-full rounded-xl border border-line-strong bg-canvas px-4 outline-none transition-colors focus:border-accent text-[0.95rem] font-normal placeholder:text-ink-faint"
       />
     </label>
   );

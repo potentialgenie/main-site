@@ -251,7 +251,7 @@ details[open] > p {
   color: var(--color-ink-muted);
 }
 
-/* Square buttons with a sweep fill on hover, as in the reference theme. */
+/* Pill buttons with a sweep fill on hover. */
 .btn {
   position: relative;
   z-index: 0;
@@ -260,7 +260,7 @@ details[open] > p {
   justify-content: center;
   gap: 0.6rem;
   overflow: hidden;
-  border-radius: 0;
+  border-radius: 999px;
   border: 1px solid transparent;
   font-weight: 500;
   line-height: 1;
@@ -357,6 +357,7 @@ details[open] > p {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-accent);
+  border-radius: 999px;
   color: var(--color-accent);
   transition:
     background-color 300ms ease,

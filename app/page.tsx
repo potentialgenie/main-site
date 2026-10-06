@@ -22,7 +22,7 @@ const orderPoints = [
 const stageMeta = [
   { label: "Discover", image: "/images/handshake.jpg" },
   { label: "Design", image: "/images/design.jpg" },
-  { label: "Build", image: "/images/desktop.jpg" },
+  { label: "Build", image: "/images/mobile-image.webp" },
 ];
 
 export default function HomePage() {
@@ -78,12 +78,12 @@ export default function HomePage() {
         <div className="container-page relative grid items-center gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.85fr)] lg:gap-16">
           <Rise className="relative aspect-[550/610] w-full max-w-[46rem] lg:max-w-none">
             <div aria-hidden="true" className="absolute right-[2%] bottom-[18%] h-[46%] w-[46%] rounded-full bg-accent/20" />
-            <div className="absolute top-0 left-0 h-[72%] w-[75.6%] overflow-hidden">
+            <div className="absolute top-0 left-0 h-[72%] w-[75.6%] overflow-hidden rounded-[1.5rem]">
               <Image src="/images/about-1.webp" alt="The team working together around a table" fill sizes="(min-width: 1024px) 560px, 80vw" className="object-cover object-[45%_center]" />
               <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
             </div>
             <div aria-hidden="true" className="dot-grid absolute top-[16%] -right-[2%] h-20 w-32 text-ink/20" />
-            <div className="absolute right-0 bottom-0 h-[72%] w-[60%] overflow-hidden">
+            <div className="absolute right-0 bottom-0 h-[72%] w-[60%] overflow-hidden rounded-[1.5rem]">
               <Image src="/images/about-2.webp" alt="The team celebrating with a high five" fill sizes="(min-width: 1024px) 440px, 70vw" className="object-cover object-[35%_center]" />
               <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
             </div>
@@ -193,7 +193,7 @@ export default function HomePage() {
           <div className="mt-14">
             <Carousel label="What clients can expect" itemClassName="w-[92%] md:w-[calc((100%-1.875rem)/2)]">
               {promises.map((item) => (
-                <article key={item.title} className="relative h-full overflow-hidden bg-card px-8 py-10 sm:px-10">
+                <article key={item.title} className="relative h-full overflow-hidden rounded-[1.5rem] bg-card px-8 py-10 sm:px-10">
                   <div aria-hidden="true" className="absolute inset-0 bg-white/[0.025] [clip-path:polygon(36%_0,62%_0,100%_68%,100%_100%,94%_100%)]" />
                   <div aria-hidden="true" className="absolute inset-0 bg-white/[0.02] [clip-path:polygon(70%_0,86%_0,100%_25%,100%_45%)]" />
                   <div className="relative flex items-center gap-5">
@@ -231,9 +231,9 @@ export default function HomePage() {
             <Carousel label="Our specialist team" itemClassName="w-[82%] sm:w-[calc((100%-1.875rem)/2)] lg:w-[calc((100%-3.75rem)/3)]">
               {specialists.map((person) => (
                 <article key={person.role} className="group relative h-full pt-14">
-                  <div aria-hidden="true" className="absolute inset-x-0 top-14 bottom-0 bg-card transition-colors duration-300 group-hover:bg-raised" />
+                  <div aria-hidden="true" className="absolute inset-x-0 top-14 bottom-0 rounded-[1.5rem] bg-card transition-colors duration-300 group-hover:bg-raised" />
                   <div className="relative px-6 pb-8">
-                    <div className="relative -mt-14 aspect-[335/372] overflow-hidden">
+                    <div className="relative -mt-14 aspect-[335/372] overflow-hidden rounded-[1.5rem]">
                       <Image src={person.image} alt="" fill sizes="(min-width: 1024px) 360px, 80vw" className="photo-mono object-cover" />
                       <span aria-hidden="true" className="absolute inset-0 bg-[#131313]/30" />
                     </div>
@@ -245,7 +245,7 @@ export default function HomePage() {
                       <HashLink
                         href="#contact"
                         aria-label={`Work with our ${person.role.toLowerCase()}`}
-                        className="inline-flex h-12 w-12 shrink-0 items-center justify-center border border-line text-ink-muted transition-colors hover:border-accent hover:bg-accent hover:text-white"
+                        className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:border-accent hover:bg-accent hover:text-white"
                       >
                         <ArrowUpRight />
                       </HashLink>
@@ -262,7 +262,7 @@ export default function HomePage() {
       {/* CTA */}
       <section aria-labelledby="cta-title" className="bg-canvas pb-28">
         <div className="container-page">
-          <div className="relative overflow-hidden bg-accent px-8 py-16 sm:px-12 lg:py-20">
+          <div className="relative overflow-hidden rounded-[2rem] bg-accent px-8 py-16 sm:px-12 lg:py-20">
             <svg aria-hidden="true" viewBox="0 0 480 300" preserveAspectRatio="none" className="absolute inset-y-0 left-[33%] hidden h-full w-[36%] md:block">
               <path d="M0 0h130l230 240v60H300L0 0Z" fill="#131313" />
               <path d="M130 0h80l270 270v30H360V240L130 0Z" fill="#1b1b1b" />
@@ -288,11 +288,11 @@ export default function HomePage() {
           <CenterHead title="How A Client Order Works">
             Three steps from the first workshop to a product you can run.
           </CenterHead>
-          <ol className="mt-14 border-t border-line">
+          <ol className="mt-14 flex flex-col gap-4">
             {clientStages.map((stage, index) => (
-              <li key={stage.step} className="border-b border-line">
-                <Rise className="grid items-center gap-6 py-10 md:grid-cols-[6rem_8rem_minmax(0,1fr)] lg:grid-cols-[7rem_10rem_minmax(0,1.1fr)_minmax(0,1fr)_10rem] lg:gap-8">
-                  <span className="font-display w-fit bg-card px-5 py-4 text-[1rem] leading-snug">
+              <li key={stage.step} className="rounded-[1.5rem] bg-card">
+                <Rise className="grid items-center gap-6 px-6 py-8 sm:px-8 md:grid-cols-[6rem_8rem_minmax(0,1fr)] lg:grid-cols-[7rem_10rem_minmax(0,1.1fr)_minmax(0,1fr)_10rem] lg:gap-8">
+                  <span className="font-display w-fit rounded-2xl bg-canvas px-5 py-4 text-[1rem] leading-snug">
                     Step
                     <span className="block">{stage.step}</span>
                   </span>
@@ -323,11 +323,11 @@ export default function HomePage() {
           <CenterHead title="Before You Get In Touch">Short answers to what clients ask first. Anything else, write to us.</CenterHead>
           <div className="mx-auto mt-14 flex max-w-[56rem] flex-col gap-4">
             {faqs.map((item) => (
-              <details key={item.q} className="group border border-line bg-canvas transition-colors open:border-accent">
+              <details key={item.q} className="group rounded-[1.25rem] border border-line bg-canvas transition-colors open:border-accent">
                 <summary className="font-display flex cursor-pointer list-none items-center justify-between gap-6 px-7 py-6 text-[1.15rem] font-bold [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <span
-                    className="inline-flex h-10 w-10 shrink-0 items-center justify-center bg-chip transition-[transform,background-color,color] group-open:rotate-45 group-open:bg-accent group-open:text-white"
+                    className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-chip transition-[transform,background-color,color] group-open:rotate-45 group-open:bg-accent group-open:text-white"
                     aria-hidden="true"
                   >
                     <Plus />
@@ -474,7 +474,7 @@ function ContactLine({ label, value }: { label: string; value: string }) {
   return (
     <li>
       <a href={`mailto:${value}`} className="group flex items-center gap-4">
-        <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center bg-card text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+        <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-card text-accent transition-colors group-hover:bg-accent group-hover:text-white">
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
             <rect x="3" y="5" width="18" height="14" rx="1.5" />
             <path d="m4 7 8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -493,7 +493,7 @@ function ContactLine({ label, value }: { label: string; value: string }) {
 function WhatWeDoArt() {
   return (
     <div className="@container absolute inset-0">
-      <div className="absolute inset-y-0 left-[10.5%] w-[81.1%] overflow-hidden bg-[#1c1c1c]">
+      <div className="absolute inset-y-0 left-[10.5%] w-[81.1%] overflow-hidden rounded-[1.75rem] bg-[#1c1c1c]">
         <div aria-hidden="true" className="absolute top-[18%] -left-[55%] aspect-square w-[150%] rounded-full border-[length:7cqw] border-[#171717]" />
         <svg aria-hidden="true" viewBox="71 0 549 695" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
           <path d="M71 42H205L615 418H552L71 64Z" fill="#df2919" />
@@ -508,7 +508,7 @@ function WhatWeDoArt() {
         <path d="M620 371 615 418H552L548 415Z" fill="#df2919" />
       </svg>
       {/* Card on the right */}
-      <div className="absolute top-[12.5%] left-[63.2%] h-[42.2%] w-[36%] bg-[#1a1a1a] p-[5%]">
+      <div className="absolute top-[12.5%] left-[63.2%] h-[42.2%] w-[36%] rounded-[1.5rem] bg-[#1a1a1a] p-[5%]">
         <p className="font-display text-[clamp(0.85rem,2.66cqw,1.125rem)] leading-[1.2] font-bold text-white">
           One team for {industries.length} industries.
         </p>
@@ -522,8 +522,8 @@ function WhatWeDoArt() {
           <Mark className="absolute inset-0 m-auto h-auto w-[36%]" />
         </div>
       </div>
-      <span aria-hidden="true" className="absolute top-[12%] left-[62.5%] aspect-square w-[3%] bg-accent" />
-      <span aria-hidden="true" className="absolute top-[52.5%] left-[97%] aspect-square w-[3%] bg-accent" />
+      <span aria-hidden="true" className="absolute top-[12%] left-[62.5%] aspect-square w-[3%] rounded-full bg-accent" />
+      <span aria-hidden="true" className="absolute top-[52.5%] left-[97%] aspect-square w-[3%] rounded-full bg-accent" />
       {/* Practices card */}
       <div className="absolute top-[62.2%] left-0 flex h-[18.4%] w-[50.2%] items-center gap-[6%] rounded-[clamp(12px,3.2cqw,22px)] bg-white px-[4%] shadow-raised">
         <div className="flex -space-x-[3.5cqw]">

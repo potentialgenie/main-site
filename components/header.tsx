@@ -89,10 +89,10 @@ export function Header() {
               </nav>
             </div>
             <div className="flex shrink-0 items-center">
-              <a href="/#contact" onClick={(event) => onSectionClick(event, "/#contact")} className="btn btn-primary btn-compact hidden sm:inline-flex">
+              <Link href="/#contact" onClick={(event) => onSectionClick(event, "/#contact")} className="btn btn-primary btn-compact hidden sm:inline-flex">
                 Contact Us
                 <ArrowUpRight />
-              </a>
+              </Link>
               <button
                 type="button"
                 className="ml-[34px] inline-flex h-[31px] w-[31px] items-center justify-center text-ink-muted transition-colors hover:text-white"
@@ -117,7 +117,7 @@ export function Header() {
         id="side-panel"
         aria-label="Menu"
         inert={!open}
-        className={`fixed top-0 right-0 z-[60] flex h-dvh w-[min(24rem,100%)] flex-col overflow-y-auto bg-card px-10 py-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed top-0 right-0 z-[60] flex h-dvh w-[min(24rem,100%)] flex-col overflow-y-auto rounded-l-[1.75rem] bg-card px-10 py-10 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -126,7 +126,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="inline-flex h-11 w-11 items-center justify-center bg-accent text-white"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white"
           >
             <span className="sr-only">Close menu</span>
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">

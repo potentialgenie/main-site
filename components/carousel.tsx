@@ -6,7 +6,7 @@ function motion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 }
 
-// Scroll-snap slider with the square pagination dots used across the page.
+// Scroll-snap slider with the round pagination dots used across the page.
 export function Carousel({ label, itemClassName, children }: { label: string; itemClassName: string; children: ReactNode }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -68,9 +68,9 @@ export function Carousel({ label, itemClassName, children }: { label: string; it
             aria-label={`Show item ${dot + 1}`}
             aria-current={dot === index}
             onClick={() => goTo(dot)}
-            className="flex h-3.5 w-3.5 items-center justify-center border border-line-strong"
+            className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-line-strong"
           >
-            <span className={`h-1.5 w-1.5 transition-colors ${dot === index ? "bg-accent" : "bg-transparent"}`} />
+            <span className={`h-1.5 w-1.5 rounded-full transition-colors ${dot === index ? "bg-accent" : "bg-transparent"}`} />
           </button>
         ))}
       </div>
