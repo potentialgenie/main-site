@@ -4,7 +4,7 @@ export const site = {
   description:
     "Make It Real designs and builds websites, web apps, mobile products, stores, and AI features. One team takes the work from the first note to launch.",
   email: "support@makeit-real.world",
-  url: "https://makeit-real.world",
+  url: "https://infinitevision.world",
 } as const;
 
 export const nav = [

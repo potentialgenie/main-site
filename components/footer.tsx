@@ -22,7 +22,7 @@ export function Footer() {
             </a>
             <ul className="mt-[34px] text-[1rem] leading-[26px] text-[#777]">
               <li>
-                <span className="text-accent">W:</span>&nbsp;&nbsp;makeit-real.world
+                <span className="text-accent">W:</span>&nbsp;&nbsp;infinitevision.world
               </li>
             </ul>
           </div>
