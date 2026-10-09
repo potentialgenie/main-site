@@ -3,7 +3,7 @@ export const site = {
   title: "Make It Real — Design and build software",
   description:
     "Make It Real designs and builds websites, web apps, mobile products, stores, and AI features. One team takes the work from the first note to launch.",
-  email: "support@makeit-real.world",
+  email: "support@infinitevision.world",
   url: "https://infinitevision.world",
 } as const;
 
